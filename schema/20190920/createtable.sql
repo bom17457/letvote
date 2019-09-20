@@ -1,3 +1,10 @@
+DROP TABLE IF EXISTS `login`;
+DROP TABLE IF EXISTS `student`;
+DROP TABLE IF EXISTS `role`;
+DROP TABLE IF EXISTS `topic`;
+DROP TABLE IF EXISTS `join_topic`;
+DROP TABLE IF EXISTS `vote_topic`;
+
 CREATE TABLE `login` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `token` varchar(500) NOT NULL,
