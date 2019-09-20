@@ -3,12 +3,26 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "nyc mocha --recursive --exit"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
-    "morgan": "~1.9.1"
+    "mocha": "^6.2.0",
+    "mock-express-response": "^0.2.2",
+    "moment": "^2.24.0",
+    "morgan": "~1.9.1",
+    "mysql": "^2.17.1",
+    "nyc": "^14.1.1",
+    "sequelize": "^5.19.0",
+    "sinon": "^7.4.2"
+  },
+  "nyc":{
+    "exclude":[
+      "app.js",
+      "test/**"
+    ]
   }
 }
