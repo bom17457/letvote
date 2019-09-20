@@ -19,8 +19,8 @@
     "sequelize": "^5.19.0",
     "sinon": "^7.4.2"
   },
-  "nyc":{
-    "exclude":[
+  "nyc": {
+    "exclude": [
       "app.js",
       "test/**"
     ]
