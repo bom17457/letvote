@@ -1,0 +1,6 @@
+DROP TABLE IF EXISTS `login`;
+DROP TABLE IF EXISTS `vote_topic`;
+DROP TABLE IF EXISTS `candidate_join_topic`;
+DROP TABLE IF EXISTS `topic`;
+DROP TABLE IF EXISTS `student`;
+DROP TABLE IF EXISTS `role`;

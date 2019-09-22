@@ -1,9 +1,3 @@
-DROP TABLE IF EXISTS `login`;
-DROP TABLE IF EXISTS `student`;
-DROP TABLE IF EXISTS `role`;
-DROP TABLE IF EXISTS `topic`;
-DROP TABLE IF EXISTS `join_topic`;
-DROP TABLE IF EXISTS `vote_topic`;
 
 CREATE TABLE `login` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
@@ -12,8 +6,12 @@ CREATE TABLE `login` (
   `student_id` varchar(20) NOT NULL,
   `create_datetime` datetime NOT NULL DEFAULT current_timestamp(),
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+CREATE TABLE `role` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `role` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 CREATE TABLE `student` (
   `id` varchar(20) NOT NULL,
   `fname` varchar(100) NOT NULL,
@@ -23,15 +21,10 @@ CREATE TABLE `student` (
   `role` int(11) NOT NULL,
   `status` varchar(10) NOT NULL,
   `create_datetime` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `student_FK` (`role`),
+  CONSTRAINT `student_FK` FOREIGN KEY (`role`) REFERENCES `role` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `role` varchar(50) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `topic` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -40,19 +33,25 @@ CREATE TABLE `topic` (
   `status` varchar(10) NOT NULL,
   `create_datetime` datetime NOT NULL DEFAULT current_timestamp(),
   `student_id` varchar(20) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-CREATE TABLE `join_topic` (
+  PRIMARY KEY (`id`),
+  KEY `topic_FK` (`student_id`),
+  CONSTRAINT `topic_FK` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+CREATE TABLE `candidate_join_topic` (
   `topic_id` int(11) NOT NULL,
   `student_id` varchar(20) NOT NULL,
-  PRIMARY KEY (`topic_id`,`student_id`)
+  PRIMARY KEY (`topic_id`,`student_id`),
+  KEY `candidate_join_topic_FK` (`student_id`),
+  CONSTRAINT `candidate_join_topic_FK` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`),
+  CONSTRAINT `candidate_join_topic_FK_1` FOREIGN KEY (`topic_id`) REFERENCES `topic` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 CREATE TABLE `vote_topic` (
   `topic_id` int(11) NOT NULL,
   `student_id` varchar(20) NOT NULL,
   `candidate_id` varchar(20) NOT NULL,
   `create_datetime` datetime NOT NULL DEFAULT current_timestamp(),
-  PRIMARY KEY (`topic_id`,`student_id`,`candidate_id`)
+  PRIMARY KEY (`topic_id`,`student_id`,`candidate_id`),
+  KEY `vote_topic_FK` (`student_id`),
+  CONSTRAINT `vote_topic_FK` FOREIGN KEY (`student_id`) REFERENCES `student` (`id`),
+  CONSTRAINT `vote_topic_FK_1` FOREIGN KEY (`topic_id`, `candidate_id`) REFERENCES `candidate_join_topic` (`topic_id`, `student_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
