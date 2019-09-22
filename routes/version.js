@@ -2,13 +2,15 @@ var express = require('express');
 var router = express.Router();
 var package = require('../package.json')
 /* GET home page. */
-router.get('/', function(req, res, next) {
-  getVersion(req, res, next)
-});
 
-module.exports = {
-  router: router,
+const route = {
   getVersion:function(req, res, next){
     res.json({version: package.version})
   }
+}
+router.get('/', route.getVersion);
+
+module.exports = {
+  router: router,
+  ...route
 }
