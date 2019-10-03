@@ -3,6 +3,7 @@ node{
     stage('pull source project'){        
         git credentialsId: 'username-password-gitlab-bom43531', url: 'https://gitlab.com/brombom43531/letvote-backend.git'        
         sh 'ls'
+        sh 'pwd'
     }
 
     stage('get last git hash'){        
@@ -14,6 +15,7 @@ node{
         def build = docker.image('backend:0.0.1')
         sh "mv config.json config.tmp"
         sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' config.tmp > config.json"        
+        sh 'pwd && ls'
         build.inside {
             sh 'pwd'     
             sh 'ls'            
