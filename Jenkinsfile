@@ -18,6 +18,7 @@ node{
         sh "cat config.json"
         sh 'pwd && ls'
         build.inside {           
+            sh 'npm install'
             sh 'npm run test'
         }
     }
