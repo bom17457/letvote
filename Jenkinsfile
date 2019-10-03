@@ -15,10 +15,9 @@ node{
         def build = docker.image('backend:0.0.1')
         sh "mv config.json config.tmp"
         sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' config.tmp > config.json"        
+        sh "cat config.json"
         sh 'pwd && ls'
-        build.inside {
-            sh 'pwd'     
-            sh 'ls'            
+        build.inside {           
             sh 'npm run test'
         }
     }
