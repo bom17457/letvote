@@ -17,6 +17,7 @@ node{
         build.inside{
             sh 'pwd'     
             sh 'ls'            
+            sh 'npm run test'
         }
     }
 
