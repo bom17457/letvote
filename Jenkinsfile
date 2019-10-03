@@ -15,7 +15,7 @@ node{
         sh "mv config.json config.tmp"
         sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' config.tmp > config.json"        
         build.inside{
-            sh 'ls'            
+            sh 'pwd'            
         }
     }
 
