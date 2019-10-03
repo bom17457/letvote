@@ -2,12 +2,22 @@ node{
     def git_last_hash = ""
     stage('pull source project'){
         sh 'ls'
-        git credentialsId: 'username-password-gitlab-bom43531', url: 'https://gitlab.com/brombom43531/letvote.git'        
+        git credentialsId: 'username-password-gitlab-bom43531', url: 'https://gitlab.com/brombom43531/letvote-backend.git'        
+    }
+
+    stage('get last git hash'){        
+        git_last_hash = sh(returnStdout: true, script: 'git rev-parse HEAD | cut -c1-8').trim()
+        echo git_last_hash
     }
 
     stage('run unit test'){
-        echo "todo"
-        git_last_hash = sh(returnStdout: true, script: 'git rev-parse HEAD | cut -c1-8').trim()
+        def build = docker.image('backend_base:0.0.1')
+        sh "mv config.json config.tmp"
+        sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' config.tmp > config.json"
+
+        build.inside{
+            sh 'npm run test'
+        }
     }
 
     stage('Analyze Code'){
