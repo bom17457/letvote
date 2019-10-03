@@ -23,7 +23,7 @@
   "nyc": {
     "exclude": [
       "app.js",
-      "test/**"
+      "test/unitTest**"
     ]
   }
 }
