@@ -1,7 +1,7 @@
 process.env.NODE_ENV = "test"
 
 let assert = require('assert')
-let version = require('../routes/version')
+let version = require('../../routes/version')
 let mock = require('mock-express-response')
 
 describe('get version', function(){
