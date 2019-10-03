@@ -1,8 +1,8 @@
 node{
     def git_last_hash = ""
-    stage('pull source project'){
-        sh 'ls'
+    stage('pull source project'){        
         git credentialsId: 'username-password-gitlab-bom43531', url: 'https://gitlab.com/brombom43531/letvote-backend.git'        
+        sh 'ls'
     }
 
     stage('get last git hash'){        
