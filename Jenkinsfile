@@ -11,10 +11,10 @@ node{
     }
 
     stage('run unit test'){
-        def build = docker.image('backend_base:0.0.1')
+        def build = docker.image('backend:0.0.1')
         sh "mv config.json config.tmp"
         sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' config.tmp > config.json"        
-        build.inside{
+        build.inside {
             sh 'pwd'     
             sh 'ls'            
             sh 'npm run test'
