@@ -1,0 +1,10 @@
+version: '2'
+services:
+    endvote:
+        container_name: endvote
+        image: registry.gitlab.com/brombom43531/letvote:REPLACE_GIT_LAST_HASH        
+        restart: always
+        ports:
+            - 3000:3000
+        environment:
+            - NODE_ENV=production

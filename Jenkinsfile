@@ -1,5 +1,6 @@
 node{
     def git_last_hash = ""
+    def address = "http://18.136.212.248:3000/"
     stage('pull source project'){        
         git credentialsId: 'username-password-gitlab-bom43531', url: 'https://gitlab.com/brombom43531/letvote-backend.git'        
         sh 'ls'
@@ -12,12 +13,11 @@ node{
     }
 
     stage('run unit test'){
-        def build = docker.image('backend:0.0.1')
+        def unit = docker.image('backend:0.0.1')
         sh "mv config.json config.tmp"
         sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' config.tmp > config.json"        
         sh "cat config.json"
-        sh 'pwd && ls'
-        build.inside {                       
+        unit.inside {                       
             sh 'npm run test'
         }
     }
@@ -26,15 +26,24 @@ node{
         echo "todo"
     }
 
-    stage('Pack Project'){
-        echo "todo"
+    stage('build'){
+        docker.withRegistry('https://registry.gitlab.com/brombom43531/letvote-backend', 'username-password-gitlab-bom43531'){
+            def create_image = docker.build("registry.gitlab.com/brombom43531/letvote-backend:$git_last_hash", '-f Dockerfile.base .')
+            create_image.push()
+        }
     }
 
+    stage('deploy'){                
+        sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' docker-compose.base > docker-compose.yml"
+        sh "scp ./docker-compose.yml ubuntu@18.136.212.248:~/docker-compose.yml"
+        sh 'ssh ubuntu@18.136.212.248  "cd ~/; docker-compose down || true; docker-compose up -d"'
+        sh "curl -X POST -H 'Authorization: Bearer QMz1lANoiKims7nHiNq5Rja9nORS73ZBfOwX6Qk3eZe' -F 'message=Deploy Success. Click for review http://165.22.245.142/job/bc_vote_frontend/$currentBuild.number/' https://notify-api.line.me/api/notify"
+    }    
+    
     stage('run e2e test'){
-        echo "todo"
-    }
-
-    stage('deploy'){
-        echo "todo"
+        def test = docker.image('e2e:0.0.1')
+        test.inside {
+            sh 'robot test/apiTest/Common.robot'
+        }
     }
 }
