@@ -1,0 +1,7 @@
+FROM python:2.7.16-slim-buster AS end2end
+RUN pip install robotframework==3.1.2 \
+    robotframework-databaselibrary==1.2.4 \
+    robotframework-extendedrequestslibrary==0.5.5 \
+    robotframework-httplibrary==0.4.2 \
+    robotframework-requests==0.5.0
+RUN pip freeze
