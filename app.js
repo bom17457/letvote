@@ -9,17 +9,23 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var bodyParser = require('body-parser')
 
 var versionRouter = require('./routes/version');
 var signin = require('./routes/signin');
 var ballot = require('./routes/ballot');
 var app = express();
+require('./extendsion/prototype').prototype()
 app.use((req, res, next) => {    
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, authorization");
     next();
 })
+
+console.log((12).Equal(12))
+
+app.use(bodyParser)
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
