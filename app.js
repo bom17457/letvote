@@ -23,8 +23,6 @@ app.use((req, res, next) => {
     next();
 })
 
-console.log((12).Equal(12))
-
 app.use(bodyParser)
 app.use(logger('dev'));
 app.use(express.json());
