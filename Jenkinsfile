@@ -41,8 +41,7 @@ node{
     }    
     
     stage('run e2e test'){
-        def test = docker.image('e2e:0.0.1')
-        sh "robot test/apiTest/Common.robot"
+        def test = docker.image('e2e:0.0.1')        
         test.inside {
             sh "mv test/apiTest/Common.robot test/apiTest/Common.robot.tmp"
             sh "sed 's/localhost:3000/18.136.212.248:3000/g' test/apiTest/Common.robot.tmp > test/apiTest/Common.robot"
