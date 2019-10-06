@@ -17,7 +17,6 @@ node{
         sh "cat config.json"
         unit.inside {       
             sh 'npm install bcrypt --save'
-            sh 'ls node_modules'
             sh 'npm run test'
         }
     }
