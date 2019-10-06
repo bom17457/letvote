@@ -17,6 +17,9 @@ node{
         sh "mv config.json config.tmp"
         sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' config.tmp > config.json"        
         sh "cat config.json"
+        sh "pwd"
+        sh "cat package.json"
+        sh "ls node_modules"
         unit.inside {                       
             sh 'npm run test'
         }
