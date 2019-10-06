@@ -7,7 +7,7 @@ I Set HEADER param request type as "application/json"
     Set Global Variable  ${header}
 
 Set request Body with "real" username and password
-    ${reqBody}=  Create Dictionary  username=bom43530 password=abcd1234
+    ${reqBody}=  Create Dictionary  username=bom43530  password=abcd1234
     Set Global Variable  ${reqBody}
 
 Send a POST HTTP request
