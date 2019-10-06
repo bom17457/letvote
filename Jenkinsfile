@@ -3,8 +3,6 @@ node{
     def address = "http://18.136.212.248:3000/"
     stage('pull source project'){        
         git credentialsId: 'username-password-gitlab-bom43531', url: 'https://gitlab.com/brombom43531/letvote-backend.git'        
-        sh 'ls'
-        sh 'pwd'
     }
 
     stage('get last git hash'){        
@@ -17,9 +15,6 @@ node{
         sh "mv config.json config.tmp"
         sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' config.tmp > config.json"        
         sh "cat config.json"
-        sh "pwd"
-        sh "cat package.json"
-        sh "ls node_modules"
         unit.inside {                       
             sh 'npm run test'
         }
