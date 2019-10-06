@@ -9,13 +9,14 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var bodyParser = require('body-parser')
 
 var versionRouter = require('./controllers/version');
 var signin = require('./controllers/signin');
 var ballot = require('./controllers/ballot');
 var app = express();
-var db = require('./models/db')
+var authentication = require('./middlewares/authentication')
+var permission = require('./middlewares/permission')
+
 require('./utilities/prototype').prototype()
 app.use((req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
@@ -24,7 +25,6 @@ app.use((req, res, next) => {
     next();
 })
 
-app.use(bodyParser)
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
@@ -32,5 +32,5 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/version', versionRouter.router);
 app.use('/signin', signin.router)
-app.use('/ballot', ballot.router)
+app.use('/ballot', authentication,permission([1, 2]), ballot.router)
 module.exports = app;

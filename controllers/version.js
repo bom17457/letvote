@@ -3,14 +3,14 @@ var router = express.Router();
 var config = require('../config.json')
 /* GET home page. */
 
-const route = {
+const struct = {
   getVersion:function(req, res, next){
     res.json({version: config.version})
   }
 }
-router.get('/', route.getVersion);
+router.get('/', struct.getVersion);
 
 module.exports = {
   router: router,
-  ...route
+  ...struct
 }

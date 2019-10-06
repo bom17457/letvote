@@ -1,12 +1,12 @@
 let assert = require('assert')
 let mockResponse = require('mock-express-response')
 let mockRequest = require('mock-express-request')
-let authen = require('../../middlewares/authen')
+let authen = require('../../middlewares/permission')
 describe('authen', function(){
 
     it('Should execute next function if authentication allow', async function(){
         let req = new mockRequest({
-            body: {
+            authInfo: {
                 role: 'manager'
             }
         })
@@ -23,7 +23,7 @@ describe('authen', function(){
 
     it('Should return 401  if authentication not allow', async function(){
         let req = new mockRequest({
-            body: {
+            authInfo: {
                 role: 'voter'
             }
         })

@@ -3,9 +3,8 @@ var router = express.Router();
 var package = require('../package.json')
 /* GET home page. */
 
-const route = {
-    ballot: function (req, res, next) {
-        setTimeout(function(){
+const struct = {
+    ballot: function (req, res, next) {        
             res.json([
                 {
                   id: "5d7a924b175caef0f4fac903",
@@ -43,13 +42,12 @@ const route = {
                   end_d: "2019-10-23 11:01:50",
                   status: "public"
                 }
-              ])
-        }, 3000)
+              ])        
         
     }
 }
-router.get('/', route.ballot);
+router.get('/', struct.ballot);
 module.exports = {
     router: router,
-    ...route
+    ...struct
 }

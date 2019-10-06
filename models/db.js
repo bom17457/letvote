@@ -12,7 +12,7 @@ connection.connect();
 module.exports.query = function (query) {
     return new Promise(function (resolve, reject) {
         connection.query(query, function(error, results, fields){
-            if(error) reject(error, error.code)
+            if(error) reject(error)
             resolve(results, fields)
         })
     })

@@ -1,3 +1,5 @@
 {
-    "version":"REPLACE_GIT_LAST_HASH"
+    "version":"REPLACE_GIT_LAST_HASH",
+    "scretKey": "43531",
+    "expire": 7
 }

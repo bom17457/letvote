@@ -1,8 +1,8 @@
 this.roles = []
 
 function auth(req, res, next){
-    const {role} = req.body
-    if(this.roles.includes(role)){
+    const {role} = req.authInfo    
+    if(this.roles.includes(role)){        
         next()
     }else{
         return res.sendStatus(401)
