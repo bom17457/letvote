@@ -13,6 +13,6 @@ module.exports.lastAction = function(token){
 }
 
 function insert(token, status, id){    
-    let sql = `INSERT INTO login (token, status, student_id) values ('${token}', '${status}', '${id}')`
+    let sql = `INSERT INTO login (token, status, user_id) values ('${token}', '${status}', '${id}')`
     db.query(sql)
 }
