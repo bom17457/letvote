@@ -32,3 +32,8 @@ Scenario: GET post signout - TestSignOut --success
     When I Set HEADER param request type as "application/json", "authentication bearer {token}"
     And Send a GET HTTP request
     Then response should return status code 200
+Scenario: GET get userProperties - TestGetUserProperties
+    Given I Set GET userproperties API endpoint
+    When I Set HEADER param request type as "application/json" and "authentication bearer {token}"
+    And Send a GET HTTP request
+    Then response should return status code 200 and message not equal not found user

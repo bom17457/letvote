@@ -12,3 +12,15 @@ module.exports.findUsername = function(username) {
         })
     return user;
 }
+
+module.exports.getUserDetail = function(id) {
+    var user = db.query(`SELECT id, fname, lname, username, role from user WHERE id=${id} LIMIT 1`)
+        .then(function (result) {     
+            if(result.length == 0) throw 'not found user'
+            return result[0]            
+        })
+        .catch(function (error) {
+            throw error
+        })
+    return user;
+}
