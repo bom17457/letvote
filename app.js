@@ -32,5 +32,5 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/version', versionRouter.router);
 app.use('/signin', signin.router)
-app.use('/ballot', authentication,permission([1, 2]), ballot.router)
+app.use('/ballot', authentication,permission(['voter', 'candidate']), ballot.router)
 module.exports = app;
