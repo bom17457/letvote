@@ -7,7 +7,7 @@ describe('signin', function(){
     it('Should return 200 and return json Object Datatype', async function(){
         let req = new mockRequest({
             body: {
-                username: 'bom43530',
+                username: 'bom43531',
                 password: 'abcd1234'
             }
         })
