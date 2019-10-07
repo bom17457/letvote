@@ -2,7 +2,7 @@ var db = require('./db.js')
 var passwordEncode = require('../utilities/passwordEncoder')
 
 module.exports.findUsername = function(username) {
-    var user = db.query(`SELECT id, fname, lname, username, password, role from user WHERE username='${username}' LIMIT 1`)
+    var user = db.query(`SELECT id, fname, lname, username, password, role, status from user WHERE username='${username}' LIMIT 1`)
         .then(function (result) {     
             if(result.length == 0) throw 'not found user'
             return result[0]            
@@ -14,9 +14,9 @@ module.exports.findUsername = function(username) {
 }
 
 module.exports.getUserDetail = function(id) {
-    var user = db.query(`SELECT id, fname, lname, username, role from user WHERE id=${id} LIMIT 1`)
+    var user = db.query(`SELECT id, fname, lname, username, role, status from user WHERE id='${id}' LIMIT 1`)
         .then(function (result) {     
-            if(result.length == 0) throw 'not found user'
+            if(result.length == 0) throw 'not found'
             return result[0]            
         })
         .catch(function (error) {

@@ -3,8 +3,8 @@ var router = express.Router();
 var IUserProperties = require('../services/userProperties.js')
 
 const struct = {
-  getProperties: async function (req, res, next) {
-    const {id} = req.authInfo    
+  getProperties: async function (req, res, next) {    
+    const {id} = req.query    
     try{
       let user = await IUserProperties.properties(id)
       res.json(user)
@@ -13,7 +13,7 @@ const struct = {
     }
   },
 }
-router.post('/', struct.getProperties);
+router.get('/', struct.getProperties);
 module.exports = {
   router: router,
   ...struct
