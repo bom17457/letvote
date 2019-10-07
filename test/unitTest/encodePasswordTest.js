@@ -10,12 +10,12 @@ describe('passwordEncoder', function(){
     })    
 
     it('Should return true if pass the password verify', async function(){
-        let result = await passwordEncoder.verifyPassword('password', encode)
+        let result = await passwordEncoder.matchPassword('password', encode)
         await assert.equal(result, true, 'Should return true')
     })
 
     it('Should return false if not pass the password verify', async function(){
-        let result = await passwordEncoder.verifyPassword('passw0rd', encode)
+        let result = await passwordEncoder.matchPassword('passw0rd', encode)
         await assert.equal(result, false, 'Should return false')
     })
 })

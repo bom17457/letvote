@@ -30,7 +30,8 @@
   "nyc": {
     "exclude": [
       "app.js",
-      "test/unitTest**"
+      "test/unitTest**",
+      "models/**"
     ]
   },
   "devDependencies": {

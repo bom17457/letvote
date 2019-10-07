@@ -14,7 +14,7 @@ module.exports.hash = function (paintextPWD) {
 }
 
 
-module.exports.verifyPassword = function (paintextPWD, hash) {
+module.exports.matchPassword = function (paintextPWD, hash) {
     return new Promise(function (resolve, reject) {
         bcrypt.compare(paintextPWD, hash, function(err, res){
             if(err) reject(err)
