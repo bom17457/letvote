@@ -3,7 +3,7 @@ I Set GET signout API endpoint
     Create Session  signout  ${API}/signout
 
 I Set HEADER param request type as "application/json", "authentication bearer {token}" and query id
-    ${header}=  Create Dictionary  Content-Type=application/json    Authorization=bearer ${body['token']}
+    ${header}=  Create Dictionary  Content-Type=application/json    Authorization=${body['token']}
     Set Global Variable  ${header}
 
 Send a GET HTTP request

@@ -9,6 +9,7 @@ Resource    TestVersion.robot
 Resource    TestSignin.robot
 Resource    TestSignout.robot
 Resource    TestGetUserProperties.robot
+Resource    TestCreateElection.robot
 *** Variables ***
 ${API}      http://localhost:3000
 *** Test Cases ***
@@ -37,4 +38,11 @@ Scenario: GET get userProperties - TestGetUserProperties
     Given I Set GET userproperties API endpoint
     When I Set HEADER param request type as "application/json" and "authentication bearer {token}"
     And Send a GET HTTP request to userproperties
+    Then response should return status code 200
+Scenario: POST post election - TestCreateElection
+    Given I Login as authority 
+    And I Set POST election API endpoint
+    When I Set HEADER param request type as "application/json" and "authentication bearer {token}"
+    And I Set request Body with "topic" "description" "start_vote_datetime" "end_vote_datetime" "start_register_datetime" "end_register_datetime"
+    And Send a POST HTTP request to create Election
     Then response should return status code 200
