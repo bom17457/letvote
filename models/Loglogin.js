@@ -4,7 +4,7 @@ module.exports.login = function(token, id){
     insert(token, 'login', id)
 }
 
-module.exports.logout = function(){
+module.exports.logout = function(token, id){
     insert(token, 'logout', id)
 }
 

@@ -12,6 +12,7 @@ var logger = require('morgan');
 
 var versionRouter = require('./controllers/version');
 var signin = require('./controllers/signin');
+var signout = require('./controllers/signout')
 var ballot = require('./controllers/ballot');
 var userproperties = require('./controllers/getUserProperties')
 
@@ -34,6 +35,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/version', versionRouter.router);
 app.use('/signin', signin.router)
+app.use('/signout',authentication, signout.router)
 app.use('/ballot', authentication,permission(['voter', 'candidate']), ballot.router)
 app.use('/userproperties', authentication, permission(['voter', 'candidate', 'authority']), userproperties.router)
 module.exports = app;
