@@ -37,5 +37,5 @@ app.use('/version', versionRouter.router);
 app.use('/signin', signin.router)
 app.use('/signout',authentication, signout.router)
 app.use('/ballot', authentication,permission(['voter', 'candidate']), ballot.router)
-app.use('/userproperties', authentication, permission(['voter', 'candidate', 'authority']), userproperties.router)
+app.use('/userproperties', authentication, userproperties.router)
 module.exports = app;

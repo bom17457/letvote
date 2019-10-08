@@ -6,7 +6,7 @@ describe('get user properties', function(){
     let encode;
     it('Should return user detail and status code 200 "OK"', async function(){        
         let req = new mockRequest({            
-            query: {
+            authInfo: {
                 id:'025930461038-1'
             }
         })
@@ -29,7 +29,7 @@ describe('get user properties', function(){
 
     it('Should return message and status code 401', async function(){
         let req = new mockRequest({
-            query: {
+            authInfo: {
                 id:'000930461038-1'
             }
         })

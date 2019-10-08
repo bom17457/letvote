@@ -4,7 +4,7 @@ var IUserProperties = require('../services/userProperties.js')
 
 const struct = {
   getProperties: async function (req, res, next) {    
-    const {id} = req.query    
+    const {id} = req.authInfo    
     try{
       let user = await IUserProperties.properties(id)
       res.json(user)
