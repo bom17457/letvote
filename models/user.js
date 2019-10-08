@@ -1,26 +1,14 @@
 var db = require('./db.js')
 var passwordEncode = require('../utilities/passwordEncoder')
 
-module.exports.findUsername = function(username) {
-    var user = db.query(`SELECT id, fname, lname, username, password, role, status from user WHERE username='${username}' LIMIT 1`)
-        .then(function (result) {     
-            if(result.length == 0) throw 'not found user'
-            return result[0]            
-        })
-        .catch(function (error) {
-            throw error
-        })
-    return user;
+module.exports.findUsername = async function(username) {
+    let user = await db.query(`SELECT id, fname, lname, username, password, role, status from user WHERE username='${username}' LIMIT 1`)   
+    if(user.length == 0) throw 'not found user'
+    return user[0];
 }
 
 module.exports.getUserDetail = function(id) {
-    var user = db.query(`SELECT id, fname, lname, username, role, status from user WHERE id='${id}' LIMIT 1`)
-        .then(function (result) {     
-            if(result.length == 0) throw 'not found'
-            return result[0]            
-        })
-        .catch(function (error) {
-            throw error
-        })
-    return user;
+    let user = db.query(`SELECT id, fname, lname, username, role, status from user WHERE id='${id}' LIMIT 1`)
+    if(user.length == 0) throw 'not found'
+    return user[0];
 }
