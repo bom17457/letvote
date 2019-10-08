@@ -1,24 +1,13 @@
 const bcrypt = require('bcrypt')
 const saltRounds = 10
 
-module.exports.hash = function (paintextPWD) {
-    return new Promise(function (resolve, reject) {
-        bcrypt.genSalt(saltRounds, function (err, salt) {
-            if (err) reject(err)
-            bcrypt.hash(paintextPWD, salt, function (err, hash) {
-                if (err) reject(err)
-                resolve(hash)
-            })
-        })
-    })
+module.exports.hash = async function (paintextPWD) {
+    let salt = await bcrypt.genSalt(saltRounds)
+    let hash = await bcrypt.hash(paintextPWD, salt)
+    return hash
 }
 
 
-module.exports.matchPassword = function (paintextPWD, hash) {
-    return new Promise(function (resolve, reject) {
-        bcrypt.compare(paintextPWD, hash, function(err, res){
-            if(err) reject(err)
-            resolve(res)
-        })
-    })
+module.exports.matchPassword = async function (paintextPWD, hash) {
+    return await bcrypt.compare(paintextPWD, hash)
 }
