@@ -7,8 +7,8 @@ module.exports.findUsername = async function(username) {
     return user[0];
 }
 
-module.exports.getUserDetail = function(id) {
-    let user = db.query(`SELECT id, fname, lname, username, role, status from user WHERE id='${id}' LIMIT 1`)
+module.exports.getUserDetail = async function(id) {
+    let user = await db.query(`SELECT id, fname, lname, username, role, status from user WHERE id='${id}' LIMIT 1`)
     if(user.length == 0) throw 'not found'
     return user[0];
 }
