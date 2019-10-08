@@ -9,7 +9,7 @@ module.exports = {
     signin: async function (username, password) {
         const user = await userdb.findUsername(username)
         if (await passwordEncode.matchPassword(password, user.password)) {            
-            let token = jwt.encode({
+            let token = 'Bearer ' + jwt.encode({
                 id:user.id,
                 username: user.username,
                 fname: user.fname,
