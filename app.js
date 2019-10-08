@@ -9,7 +9,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var cors = require('cors')
 var versionRouter = require('./controllers/version');
 var signin = require('./controllers/signin');
 var signout = require('./controllers/signout')
@@ -21,13 +21,13 @@ var authentication = require('./middlewares/authentication')
 var permission = require('./middlewares/permission')
 
 require('./utilities/prototype').prototype()
-app.use((req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, authorization");
-    next();
-})
 
+const corsOptions = {
+    origin: [process.env.URL, 'http://localhost:8080']
+}
+
+app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
