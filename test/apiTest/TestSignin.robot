@@ -7,7 +7,7 @@ I Set HEADER param request type as "application/json"
     Set Global Variable  ${header}
 
 Set request Body with "real" username and password
-    ${reqBody}=  Create Dictionary  username=bom43530  password=abcd1234
+    ${reqBody}=  Create Dictionary  username=bom43531  password=abcd1234
     Set Global Variable  ${reqBody}
 
 Send a POST HTTP request
@@ -20,13 +20,13 @@ Send a POST HTTP request - fail
     ${res}=  Post Request  signin  /    data=${reqBody}     headers=${header}
     Set Global Variable  ${res}
 
-Then response should return status code 200 and role equal student
+response should return status code 200 and role equal voter
     Should Be Equal As Strings  ${res.status_code}  200
-    Should Be String  ${body['role']}
+    Should Be String  ${body['token']}
 
 Set request Body with "fake" username and password
      ${reqBody}=  Create Dictionary  username=voter  password=abab
      Set Global Variable  ${reqBody}
 
-Then response should return status code 401
+response should return status code 401
     Should Be Equal As Strings  ${res.status_code}  401    
