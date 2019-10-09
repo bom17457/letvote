@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var manageElection = require('../services/manageElection')
 
 const struct = {
   Election: async function(req, res, next){
@@ -9,10 +10,12 @@ const struct = {
       res.send(400, {})
     }
   },
-  PostElection: async function (req, res, next) {
+  PostElection: async function (req, res, next) {    
+    const new_election = req.body
+    const {id} = req.authInfo
     try{
-      
-      res.json({})
+      await manageElection.insert(new_election, id)
+      res.send(201)
     }catch(Exception){            
       res.send(400, {})
     }

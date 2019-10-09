@@ -1,14 +1,42 @@
 let db = require('./db')
 
-module.exports.findOneElection = function(){
+module.exports.findOneElection = function () {
 }
 
-module.exports.insertOneElection = function(token, id){    
+/**
+ * @param Object
+ * 
+ */
+module.exports.insertOneElection = async function (data, userID) {
+    let query = `INSERT INTO letvote.election 
+                (
+                    topic,
+                    description, 
+                    displaytext, 
+                    start_register_datetime, 
+                    end_register_datetime, 
+                    start_vote_datetime, 
+                    end_vote_datetime, status, 
+                    create_datetime, 
+                    user_id
+                ) VALUES(
+                    '${data.topic}',
+                    '${data.description}', 
+                    '${data.displayText}',  
+                    '${data.electionFrom}', 
+                    '${data.electionTo}', 
+                    '${data.registerFrom}', 
+                    '${data.registerTo}', 
+                    'publish', 
+                    current_timestamp(), 
+                    '${userID}'
+                )`
+    await db.query(query)
 }
 
-module.exports.updateOneElection = function(token, id){    
+module.exports.updateOneElection = function (token, id) {
 }
 
-module.exports.updateElectionStatus = function(token){
-    
+module.exports.updateElectionStatus = function (token) {
+
 }
