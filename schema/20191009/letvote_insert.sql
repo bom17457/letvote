@@ -1,0 +1,22 @@
+SET FOREIGN_KEY_CHECKS = 0; 
+truncate table `login`;
+truncate table `vote_election`;
+truncate table `candidate_join_election`;
+truncate table `election`;
+truncate table `user`;
+truncate table `role`;
+SET FOREIGN_KEY_CHECKS = 1; 
+
+INSERT INTO letvote.login (token, status, user_id, create_datetime) VALUES('eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c', 'login', '1', current_timestamp());
+INSERT INTO letvote.`role` (`role`) VALUES('voter');
+INSERT INTO letvote.`role` (`role`) VALUES('candidate');
+INSERT INTO letvote.user (id, fname, lname, username, password, `role`, status, create_datetime) VALUES('025930461038-1', 'authority', 'Katip', 'authority', '$2b$10$YfdcarD0zRuv69SzJMyjDuyrZj2ZMJ.bM3C5.9d987XKviSMxBfS.', 'voter', 'enable', current_timestamp());
+INSERT INTO letvote.user (id, fname, lname, username, password, `role`, status, create_datetime) VALUES('025930461038-2', 'candidate', 'Tip', 'candidate', '$2b$10$YfdcarD0zRuv69SzJMyjDuyrZj2ZMJ.bM3C5.9d987XKviSMxBfS.', 'candidate', 'enable', current_timestamp());
+INSERT INTO letvote.user (id, fname, lname, username, password, `role`, status, create_datetime) VALUES('025930461038-3', 'voter', 'Tip2', 'voter', '$2b$10$YfdcarD0zRuv69SzJMyjDuyrZj2ZMJ.bM3C5.9d987XKviSMxBfS.', 'voter', 'enable', current_timestamp());
+INSERT INTO letvote.user (id, fname, lname, username, password, `role`, status, create_datetime) VALUES('025930461038-4', 'voter2', 'Tip3', 'voter2', '$2b$10$YfdcarD0zRuv69SzJMyjDuyrZj2ZMJ.bM3C5.9d987XKviSMxBfS.', 'candidate', 'enable', current_timestamp());
+INSERT INTO letvote.user (id, fname, lname, username, password, `role`, status, create_datetime) VALUES('025930461038-5', 'candidate2', 'Tip3', 'candidate', '$2b$10$YfdcarD0zRuv69SzJMyjDuyrZj2ZMJ.bM3C5.9d987XKviSMxBfS.', 'voter', 'enable', current_timestamp());
+INSERT INTO letvote.election (topic, description, displaytext, start_register_datetime, end_register_datetime, start_vote_datetime, end_vote_datetime, status, create_datetime, user_id) VALUES('Election Activity Leader','description', 'display',  '2019-09-22 11:01:50', '2019-10-22 11:01:50', '2019-09-22 11:01:50', '2019-10-22 11:01:50', 'Open', current_timestamp(), '025930461038-1');
+INSERT INTO letvote.candidate_join_election (election_id, user_id) VALUES(1, '025930461038-2');
+INSERT INTO letvote.candidate_join_election (election_id, user_id) VALUES(1, '025930461038-4');
+INSERT INTO letvote.vote_election (election_id, user_id, candidate_id, create_datetime) VALUES(1, '025930461038-1', '025930461038-2', current_timestamp());
+INSERT INTO letvote.vote_election (election_id, user_id, candidate_id, create_datetime) VALUES(1, '025930461038-3', '025930461038-4', current_timestamp());

@@ -15,7 +15,7 @@ var signin = require('./controllers/signin');
 var signout = require('./controllers/signout')
 var ballot = require('./controllers/ballot');
 var userproperties = require('./controllers/getUserProperties')
-
+var manageElection = require('./controllers/manageElection')
 var app = express();
 var authentication = require('./middlewares/authentication')
 var permission = require('./middlewares/permission')
@@ -38,4 +38,5 @@ app.use('/signin', signin.router)
 app.use('/signout',authentication, signout.router)
 app.use('/ballot', authentication,permission(['voter', 'candidate']), ballot.router)
 app.use('/userproperties', authentication, userproperties.router)
+app.use('/election', authentication,permission(['authority']), manageElection.router)
 module.exports = app;
