@@ -7,7 +7,7 @@ describe('signin', function(){
     it('Should return 200 and return json Object Datatype', async function(){
         let req = new mockRequest({
             body: {
-                username: 'bom43531',
+                username: 'authority',
                 password: 'abcd1234'
             }
         })
@@ -45,7 +45,7 @@ describe('signin', function(){
     it('Should return 401 and message as string type if password dotn match', async function(){
         let req = new mockRequest({
             body: {
-                username: 'bom43531',
+                username: 'authority',
                 password: 'abcd12345'
             }
         })
