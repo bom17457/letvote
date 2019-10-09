@@ -1,32 +1,68 @@
 *** Keywords ***
-I Set POST signin API endpoint
+a user with authority account
     Create Session  signin  ${API}/signin
+    ${headers}=  Create Dictionary  Content-Type=application/json
+    ${data}=  Create Dictionary  username=${authority username}  password=abcd1234
+    Set Global Variable  ${headers}
+    Set Global Variable  ${data}
 
-I Set HEADER param request type as "application/json"
-    ${header}=  Create Dictionary  Content-Type=application/json
-    Set Global Variable  ${header}
+a user with voter account
+    Create Session  signin  ${API}/signin
+    ${headers}=  Create Dictionary  Content-Type=application/json
+    ${data}=  Create Dictionary  username=${voter username}  password=abcd1234
+    Set Global Variable  ${headers}
+    Set Global Variable  ${data}
 
-Set request Body with "real" username and password
-    ${reqBody}=  Create Dictionary  username=bom43531  password=abcd1234
-    Set Global Variable  ${reqBody}
+a user with candidate account
+    Create Session  signin  ${API}/signin
+    ${headers}=  Create Dictionary  Content-Type=application/json
+    ${data}=  Create Dictionary  username=${candidate username}  password=abcd1234
+    Set Global Variable  ${headers}
+    Set Global Variable  ${data}
 
-Send a POST HTTP request
-    ${res}=  Post Request  signin  /    data=${reqBody}     headers=${header}
-    ${body}=  To Json  ${res.content}
-    Set Global Variable  ${res}
-    Set Global Variable  ${body}
+a user with any account
+    Create Session  signin  ${API}/signin
+    ${headers}=  Create Dictionary  Content-Type=application/json
+    ${data}=  Create Dictionary  username=${any username}  password=abcd1234
+    Set Global Variable  ${headers}
+    Set Global Variable  ${data}
+#--------------------------------------------------------------------------------#
+user has signin
+    ${response}=  POST Request  signin   /    data=${data}     headers=${headers}
+    Set Global Variable  ${response}    
 
-Send a POST HTTP request - fail
-    ${res}=  Post Request  signin  /    data=${reqBody}     headers=${header}
-    Set Global Variable  ${res}
+user get result
+    ${result}=  To Json  ${response.content}    
+    Set Global Variable  ${result}    
+#--------------------------------------------------------------------------------#
+user recived status code 200
+    Should Be Equal As Strings  ${response.status_code}  200
 
-response should return status code 200 and role equal voter
-    Should Be Equal As Strings  ${res.status_code}  200
-    Should Be String  ${body['token']}
+user recived status code 401
+    Should Be Equal As Strings  ${response.status_code}  401
 
-Set request Body with "fake" username and password
-     ${reqBody}=  Create Dictionary  username=voter  password=abab
-     Set Global Variable  ${reqBody}
+recived access token
+    Should Be String  ${result['token']}
 
-response should return status code 401
-    Should Be Equal As Strings  ${res.status_code}  401    
+#--------------------------------------------------------------------------------#
+role is authority
+    Create Session  userproperties  ${API}/userproperties
+    ${headers}=  Create Dictionary  Content-Type=application/json    Authorization=${result['token']}
+    ${response}=  GET Request  userproperties   /    headers=${headers}
+    ${result}=  To Json  ${response.content}
+    Should Be Equal As Strings  ${result['role']}  authority
+
+role is voter
+    Create Session  userproperties  ${API}/userproperties
+    ${headers}=  Create Dictionary  Content-Type=application/json    Authorization=${result['token']}
+    ${response}=  GET Request  userproperties   /    headers=${headers}
+    ${result}=  To Json  ${response.content}
+    Should Be Equal As Strings  ${result['role']}  voter
+
+role is candidate
+    Create Session  userproperties  ${API}/userproperties
+    ${headers}=  Create Dictionary  Content-Type=application/json    Authorization=${result['token']}
+    ${response}=  GET Request  userproperties   /    headers=${headers}
+    ${result}=  To Json  ${response.content}
+    Should Be Equal As Strings  ${result['role']}  candidate
+#--------------------------------------------------------------------------------#

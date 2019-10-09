@@ -1,12 +1,20 @@
 *** Keywords ***
-I Set GET userproperties API endpoint
+a user request they infomation
     Create Session  userproperties  ${API}/userproperties
+    ${headers}=  Create Dictionary  Content-Type=application/json    Authorization=${result['token']}
+    Set Global Variable  ${headers}
+a anonymous request they infomation
+    Create Session  userproperties  ${API}/userproperties
+    ${headers}=  Create Dictionary  Content-Type=application/json    Authorization=
+    Set Global Variable  ${headers}
+user get infomation
+    ${response}=  GET Request  userproperties   /    headers=${headers}
+    Set Global Variable  ${response}   
 
-I Set HEADER param request type as "application/json" and "authentication bearer {token}"
-    ${header}=  Create Dictionary  Content-Type=application/json  Authorization=${body['token']}
-    Set Global Variable  ${header}
-Send a GET HTTP request to userproperties
-    ${res}=  GET Request  userproperties  ?id=025930461038-1    headers=${header}
-    ${body}=  To Json  ${res.content}
-    Set Global Variable  ${res}
-    #Set Global Variable  ${body}
+user should have "id" "fname" "lname" "username" "role" "status"
+    Should Be String  ${result['id']}
+    Should Be String  ${result['fname']}
+    Should Be String  ${result['lname']}
+    Should Be String  ${result['username']}
+    Should Be String  ${result['role']}
+    Should Be String  ${result['status']}
