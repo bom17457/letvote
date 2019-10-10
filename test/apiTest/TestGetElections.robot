@@ -5,6 +5,6 @@ a user request the election list
     Set Global Variable  ${headers}
 
 user get election list
-    ${response}=  GET Request  elections   /    headers=${headers}
+    ${response}=  GET Request  election   /    headers=${headers}
     Set Global Variable  ${response}  
 
