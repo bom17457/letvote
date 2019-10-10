@@ -41,10 +41,17 @@ Scenario: Create Election
     When user post election infomation
     Then user recived status code 201
 
-# Scenario: UpdateElectionStatus
-#     Given 
-#     When 
-#     Then 
+Scenario: find voter
+    Given a authority with name or identity voter info
+    When user find with candidate info 
+    Then user recived status code 200
+    And voter recived voter info
+
+Scenario: enroll the candidate
+    Given a authority with candidate info
+    WHEN authority enroll candidate to election with candidate info
+    Then user recived status code 200
+    And authority recived candidate info with role candidate and not voter
 
 Scenario: success - Signin With "voter" account
     Given a user with voter account
