@@ -4,12 +4,8 @@ var manageElection = require('../services/manageElection')
 
 const struct = {
   getElection: async function(req, res, next){
-    try{
       let result = await manageElection.getAllElection()
       res.json(result)
-    }catch(Exception){
-      res.sendStatus(400)
-    }
   },
   getElectionByid: async function(req, res, next){
 
