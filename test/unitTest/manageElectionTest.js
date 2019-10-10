@@ -3,7 +3,7 @@ let mockResponse = require('mock-express-response')
 let mockRequest = require('mock-express-request')
 let manageElection = require('../../controllers/manageElection')
 
-describe('signout', function () {
+describe('Create Election', function () {
 
     it('Should return 200', async function () {
         let req = new mockRequest({
