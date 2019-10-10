@@ -34,9 +34,7 @@ Scenario: success - Signin With "Authority" account
 Scenario: GetElections List
     Given a user request the election list
     When user get election list
-    #And user get result
     Then user recived status code 200
-    And data type should be array json
 
 Scenario: Create Election
     Given a user create election infomation
