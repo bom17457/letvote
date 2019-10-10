@@ -8,7 +8,7 @@ const struct = {
       let result = await manageElection.getAllElection()
       res.json(result)
     }catch(Exception){
-      res.send(400, {})
+      res.sendStatus(400)
     }
   },
   getElectionByid: async function(req, res, next){
