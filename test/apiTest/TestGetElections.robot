@@ -1,6 +1,6 @@
 *** Keywords ***
 a user request the election list
-    Create Session  elections  ${API}/elections
+    Create Session  election  ${API}/election
     ${headers}=  Create Dictionary  Content-Type=application/json    Authorization=${result['token']}
     Set Global Variable  ${headers}
 
