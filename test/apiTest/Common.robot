@@ -12,6 +12,7 @@ Resource    TestGetUserProperties.robot
 Resource    TestCreateElection.robot
 Resource    TestGetElections.robot
 Resource    TestFindVoter.robot
+Resource    TestEnrollToElection.robot
 *** Variables ***
 ${API}      http://localhost:3000
 ${authority username}  authority
