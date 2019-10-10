@@ -10,6 +10,7 @@ Resource    TestSignin.robot
 Resource    TestSignout.robot
 Resource    TestGetUserProperties.robot
 Resource    TestCreateElection.robot
+Resource    TestGetElections.robot
 *** Variables ***
 ${API}      http://localhost:3000
 ${authority username}  authority
@@ -30,11 +31,23 @@ Scenario: success - Signin With "Authority" account
     And recived access token
     And role is authority
 
+Scenario: GetElections List
+    Given a user request the election list
+    When user get election list
+    #And user get result
+    Then user recived status code 200
+    And data type should be array json
+
 Scenario: Create Election
     Given a user create election infomation
     When user post election infomation
     Then user recived status code 201
-    
+
+# Scenario: UpdateElectionStatus
+#     Given 
+#     When 
+#     Then 
+
 Scenario: success - Signin With "voter" account
     Given a user with voter account
     When user has signin
