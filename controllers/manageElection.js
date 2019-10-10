@@ -3,12 +3,16 @@ var router = express.Router();
 var manageElection = require('../services/manageElection')
 
 const struct = {
-  Election: async function(req, res, next){
+  getElection: async function(req, res, next){
     try{
-
+      let result = await manageElection.getAllElection()
+      res.json(result)
     }catch(Exception){
       res.send(400, {})
     }
+  },
+  getElectionByid: async function(req, res, next){
+
   },
   PostElection: async function (req, res, next) {    
     const new_election = req.body
@@ -36,7 +40,8 @@ const struct = {
     }
   }
 }
-router.get('/', struct.Election)
+router.get('/', struct.getElection)
+router.get(':id', struct.getElectionByid)
 router.post('/', struct.PostElection);
 router.put('/', struct.UpdateElection);
 router.delete('/', struct.DisableElection);

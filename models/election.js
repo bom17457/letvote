@@ -34,6 +34,11 @@ module.exports.insertOneElection = async function (data, userID) {
     await db.query(query)
 }
 
+module.exports.getAll = async function(){
+    let query = `SELECT * FROM letvote.election`
+    return await db.query(query)
+}
+
 module.exports.updateOneElection = function (token, id) {
 }
 
