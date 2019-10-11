@@ -1,4 +1,3 @@
-let userdb = require('../models/user')
 let users = require('../models/user.model')
 let log_login = require('../models/Loglogin')
 let passwordEncode = require('../utilities/passwordEncoder')
