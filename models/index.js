@@ -6,8 +6,6 @@ const db = new Sequelize(config.db.database, config.db.username, config.db.passw
     timezone: config.db.timezone,
     define: {
         timestamps: false,
-        updateAt: false,
-        createAt: 'create_datetime',
         freezeTableName: true
     },
     query: {
