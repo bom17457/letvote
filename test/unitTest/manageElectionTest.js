@@ -12,7 +12,7 @@ describe('Create Election', function () {
             },
             body: {
                 topic: 'Student Election 2020',
-                description: 'Electing',
+                description: 'Electing success',
                 electionFrom: '2019-09-22 11:01:50',
                 electionTo: '2019-09-22 11:01:50',
                 registerFrom: '2019-09-22 11:01:50',
@@ -30,14 +30,14 @@ describe('Create Election', function () {
         await assert.notEqual(res.statusCode, '400', 'Should not return 400')
     })
 
-    it('Should return 401', async function () {
+    it('Should return 400', async function () {
         let req = new mockRequest({
             authInfo: {
                 id: '025930461038-1'
             },
             body: {
                 topic: 'Student Election 2020',
-                description: 'Electing',
+                description: 'Electing fail',
                 electionFrom: '18082019',
                 electionTo: '18082019',
                 registerFrom: '18082019',
