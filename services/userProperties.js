@@ -1,11 +1,9 @@
-let userdb = require('../models/user')
-let log_login = require('../models/Loglogin')
-let config = require('../config.json')
-let moment = require('moment')
+let users = require('../models/user.model')
 
 module.exports = {
     properties: async function (id) {
-        let userdetail = await userdb.getUserDetail(id)
-        return userdetail
+        let userdetail = await users.findAll({where:{id:id}})
+        if(userdetail.length == 0) throw 'not found'
+        return userdetail[0]
     }
 }
