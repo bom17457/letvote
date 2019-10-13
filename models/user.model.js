@@ -28,7 +28,7 @@ const users = db.define('user', {
         allowNull: false
     },
     status: {
-        type: Sequelize.ENUM,
+        type: Sequelize.ENUM('enable', 'disable'),
         allowNull: false
     },
     create_datetime: {
