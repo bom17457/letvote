@@ -10,7 +10,8 @@ const db = new Sequelize(config.db.database, config.db.username, config.db.passw
     },
     query: {
         raw: true
-    }
+    },
+    logging: console.log
 })
 
 db.authenticate()
