@@ -43,3 +43,38 @@ describe('get user properties', function(){
         await assert.equal(res._getJSON().message, 'not found', 'Should return message `not found`')      
     })
 })
+
+describe('search user properties', function(){
+    it('input id only Should return 200 and userlist', async function(){
+        let req = new mockRequest({
+            body: {
+                id:'000930461038-1',
+                fullname: 'authority katip'
+            }
+        })
+        let res = new mockResponse({})
+        let exec = false
+        let next = function(){exec = true};
+
+        await getUserProperties.searchUser(req, res, next)
+        await assert.equal(res.statusCode, '200', 'Should return 200')
+        await assert.equal(typeof res._getJSON(), 'object', 'Should return object')
+    })
+
+    it('Should return 400 not found', async function(){
+        let req = new mockRequest({
+            body: {
+                id:'00000000000-1',
+                fullname: 'authority fsdfs'
+            }
+        })
+        let res = new mockResponse({})
+        let exec = false
+        let next = function(){exec = true};
+
+        await getUserProperties.searchUser(req, res, next)
+        await assert.equal(res.statusCode, '400', 'Should return 400')
+        await assert.equal(res._getJSON().message, 'not found', 'Should return "not found"')
+        await assert.equal(typeof res._getJSON(), 'object', 'Should return object')
+    })
+})
