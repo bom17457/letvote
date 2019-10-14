@@ -36,6 +36,7 @@ describe('get candidate list in election', function(){
         await manageCandidate.getCandidates(req, res, next)
         await assert.equal(res.statusCode, '200', `Should return 200, got ${res.statusCOde}`)
         await assert.equal(typeof res._getJSON(), 'object', 'Should return JSON object')
+        await assert.equal(res._getJSON()[0].role, 'candidate', 'Should return candidate')
     })
 })
 

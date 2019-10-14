@@ -8,23 +8,25 @@ const struct = {
             let new_role_user = await manageCandidate.enrollCandidate(electionID, voterID)
             res.json(new_role_user)
         } catch (Exception) {
+            console.log(Exception)
             res.send(400, Exception)
         }
     },
     getCandidates: async function (req, res, next) {
         try {
             const { electionID } = req.params
-            res.sendStatus(200)
+            let candidates = await manageCandidate.getCandidates(electionID)
+            res.json(candidates)
         } catch (Exception) {
-            res.SendStatus(400)
+            res.status(400)
         }
     },
     disableCandidate: async function (req, res, next) {
         try {
             const { electionID, report } = req.body
-            res.sendStatus(200)
+            res.status(200)
         } catch (Exception) {
-            res.SendStatus(400)
+            res.status(400)
         }
     }
 }
