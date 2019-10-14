@@ -40,20 +40,20 @@ describe('get candidate list in election', function(){
     })
 })
 
-describe('disable candidate with report', function(){
-    it('should return 200 and return status disable', async function(){
-        let req = new mockRequest({
-            body:{
-                candidateID: 1,
-                reportMessage:'message reporter'
-            }
-        })
-        let res = new mockResponse({})
-        let exec = false
-        let next = function () { exec = true }
+// describe('disable candidate with report', function(){
+//     it('should return 200 and return status disable', async function(){
+//         let req = new mockRequest({
+//             body:{
+//                 candidateID: 1,
+//                 reportMessage:'message reporter'
+//             }
+//         })
+//         let res = new mockResponse({})
+//         let exec = false
+//         let next = function () { exec = true }
         
-        await manageCandidate.disableCandidate('req, res, next')
-        await assert.equal(res.statusCode, '200', `Should return 200, got ${res.statusCode}`)
-        await assert.equal(res._getJSON().status, 'disable', 'should be equal disable')
-    })   
-})
+//         await manageCandidate.disableCandidate('req, res, next')
+//         await assert.equal(res.statusCode, '200', `Should return 200, got ${res.statusCode}`)
+//         await assert.equal(res._getJSON().status, 'disable', 'should be equal disable')
+//     })   
+// })
