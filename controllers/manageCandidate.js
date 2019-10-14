@@ -30,7 +30,8 @@ const struct = {
         }
     }
 }
-router.get('/', struct.enrollCandidate);
+router.get('/', struct.getCandidates);
+router.post('/enroll', struct.enrollCandidate)
 module.exports = {
     router: router,
     ...struct

@@ -19,6 +19,7 @@ var manageElection = require('./controllers/manageElection')
 var app = express();
 var authentication = require('./middlewares/authentication')
 var permission = require('./middlewares/permission')
+var manageCandidate = require('./controllers/manageCandidate')
 
 require('./utilities/prototype').prototype()
 
@@ -39,4 +40,5 @@ app.use('/signout',authentication, signout.router)
 app.use('/ballot', authentication,permission(['voter', 'candidate']), ballot.router)
 app.use('/userproperties', authentication, userproperties.router)
 app.use('/election', authentication,permission(['authority']), manageElection.router)
+app.use('/candidate', authentication,permission(['authority']), manageCandidate.router)
 module.exports = app;

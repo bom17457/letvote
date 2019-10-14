@@ -16,8 +16,8 @@ Resource    TestEnrollToElection.robot
 *** Variables ***
 ${API}      http://localhost:3000
 ${authority username}  authority
-${voter username}  voter
-${candidate username}  candidate
+${voter username}  voter1
+${candidate username}  candidate1
 ${any username}  any
 *** Test Cases ***
 Scenario: GET get version - TestVersion
@@ -62,6 +62,11 @@ Scenario: success - Signin With "voter" account
     Then user recived status code 200
     And recived access token
     And role is voter
+
+# Scenario: Get Ballot
+#     Given a voter want ballot list
+#     WHEN voter request ballot list
+#     Then recive ballot
 
 Scenario: success - Signin With "candidate" account
     Given a user with candidate account
