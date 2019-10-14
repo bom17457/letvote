@@ -20,10 +20,17 @@
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
+    "password": "abcd1234",
+    "database": "letvote",
+    "host": "18.136.212.248",
     "dialect": "mysql",
-    "operatorsAliases": false
+    "timezone": "+07:00",
+    "define": {
+      "timestamps": false,
+      "freezeTableName": true
+    },
+    "query": {
+      "raw": true
+    }
   }
 }
