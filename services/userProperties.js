@@ -1,17 +1,16 @@
-let users = require('../models/user.model')
-let Sequelize = require('sequelize')
-let Op = Sequelize.Op
+let db = require('../models')
+let Op = db.Sequelize.Op
 module.exports = {
     properties: async function (id) {
-        let userdetail = await users.findAll({ where: { id: id } })
-        if (userdetail.length == 0) throw 'not found'
-        return userdetail[0]
+        let userdetail = await db.users.findOne({ where: { id: id } })        
+        if (userdetail == null) throw 'not found'        
+        return userdetail
     },
     searchUser: async function (id, fullname) {
-        let userdetail = await users.findAll(
+        let userdetail = await db.users.findAll(
             {
                 where: {
-                    [Op.or]: [Sequelize.where(Sequelize.fn("concat", Sequelize.col("fname"), " ", Sequelize.col("lname")), {
+                    [Op.or]: [db.Sequelize.where(db.Sequelize.fn("concat", db.Sequelize.col("fname"), " ", db.Sequelize.col("lname")), {
                         [Op.like]: `%${fullname}%`
                     }), 
                     { 

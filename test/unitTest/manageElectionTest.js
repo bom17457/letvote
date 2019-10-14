@@ -5,7 +5,7 @@ let manageElection = require('../../controllers/manageElection')
 
 describe('Create Election', function () {
 
-    it('Should return 200', async function () {
+    it('Should return 201', async function () {
         let req = new mockRequest({
             authInfo: {
                 id: '025930461038-1'

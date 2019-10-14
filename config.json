@@ -1,12 +1,5 @@
 {
     "version":"REPLACE_GIT_LAST_HASH",
     "scretKey": "43531",
-    "expire": 7,
-    "db":{
-	"host": "18.136.212.248",
-	"database": "letvote",
-	"username": "root",
-	"password": "abcd1234",
-	"timezone": "+07:00"	
-    }
+    "expire": 7
 }

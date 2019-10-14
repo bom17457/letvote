@@ -8,7 +8,7 @@ describe('enroll candidate to election', function(){
         let req = new mockRequest({
             body: {
                 voterID: '025930461038-5',
-                electionID: '1'
+                electionID: 1
             }
         })
         let res = new mockResponse({})
@@ -26,7 +26,7 @@ describe('get candidate list in election', function(){
     it('should return 200 and list of candidate in election', async function(){
         let req = new mockRequest({
             params:{
-                electionID: '1'
+                electionID: 1
             }
         })
         let res = new mockResponse({})
@@ -43,7 +43,7 @@ describe('disable candidate with report', function(){
     it('should return 200 and return status disable', async function(){
         let req = new mockRequest({
             body:{
-                candidateID:'1',
+                candidateID: 1,
                 reportMessage:'message reporter'
             }
         })

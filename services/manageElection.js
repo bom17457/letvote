@@ -1,8 +1,8 @@
-let manageElection = require('../models/election')
-let elections = require('../models/election.model.js')
+let db = require('../models')
 
-module.exports.insert = async function(data, userID){        
-    await elections.create({
+module.exports.insert = async function(data, userID){       
+    console.log(data) 
+    await db.elections.create({
         topic: data.topic,
         description: data.description, 
         displaytext: data.displayText, 
@@ -10,11 +10,12 @@ module.exports.insert = async function(data, userID){
         end_register_datetime: data.registerTo, 
         start_vote_datetime: data.electionFrom, 
         end_vote_datetime : data.electionTo, 
-        status: 'public',         
-        user_id: userID
+        status: 'active',         
+        create_datetime: new Date(),
+        owner: userID
     })
 }
 
 module.exports.getAllElection = async function(){
-    return await elections.findAll()
+    return await db.elections.findAll()
 }

@@ -48,8 +48,8 @@ describe('search user properties', function(){
     it('input id only Should return 200 and userlist', async function(){
         let req = new mockRequest({
             body: {
-                id:'000930461038-1',
-                fullname: 'authority katip'
+                id:'025930461038-1',
+                fullname: 'authority authority'
             }
         })
         let res = new mockResponse({})

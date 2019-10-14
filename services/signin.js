@@ -1,5 +1,4 @@
-let users = require('../models/user.model')
-let log_login = require('../models/Loglogin')
+let db = require('../models')
 let passwordEncode = require('../utilities/passwordEncoder')
 let jwt = require('jwt-simple')
 let config = require('../config.json')
@@ -7,7 +6,7 @@ let moment = require('moment')
 
 module.exports = {
     signin: async function (username, password) {
-        let user = await users.findAll({
+        let user = await db.users.findAll({
             where: {
                 username: username
             }            
@@ -25,7 +24,7 @@ module.exports = {
             iat: moment().unix(),
             exp: moment().add(config.expire, 'days').unix()
         }, config.scretKey) 
-        log_login.login(token, user.id)                        
+        await db.login.create({token:token, user_id: user.id, status:'login'})
         return {token: token}                    
     }
 }

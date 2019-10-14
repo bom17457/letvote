@@ -19,3 +19,5 @@ Create table and sample data
     Should Be Equal As Strings   ${Output}   None
     ${output} =     Execute SQL Script       ./schema/${Version}/${DBName}_insert.sql
     Should Be Equal As Strings   ${Output}   None
+
+    sequelize-auto -o "./models" -d letvote -h 18.136.212.248 -u root -p 3306 -x abcd1234 -e mysql

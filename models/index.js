@@ -1,28 +1,37 @@
-const Sequelize = require('sequelize')
-const config = require('../config.json')
-const db = new Sequelize(config.db.database, config.db.username, config.db.password, {
-    dialect: 'mysql',
-    host: config.db.host,
-    timezone: config.db.timezone,
-    define: {
-        timestamps: false,
-        freezeTableName: true
-    },
-    query: {
-        raw: true
-    },
-    logging: console.log
-})
+'use strict';
 
-db.authenticate()
-    .then(function () {
-        console.log('Connection has been success')
-    })
-    .catch(function () {
-        console.log('connection fail')
-    })
-    .finally(function () {
-        //db.close()
-    })
+const fs = require('fs');
+const path = require('path');
+const Sequelize = require('sequelize');
+const basename = path.basename(__filename);
+const env = process.env.NODE_ENV || 'development';
+const config = require(__dirname + '/../config/config.json')[env];
+const db = {};
 
-module.exports = db
+let sequelize;
+if (config.test) {
+  sequelize = new Sequelize(process.env[config.test], config);
+} else {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
+}
+
+fs
+  .readdirSync(__dirname)
+  .filter(file => {
+    return (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js');
+  })
+  .forEach(file => {
+    const model = sequelize['import'](path.join(__dirname, file));
+    db[model.name] = model;
+  });
+
+Object.keys(db).forEach(modelName => {
+  if (db[modelName].associate) {
+    db[modelName].associate(db);
+  }
+});
+console.log(db)
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
+
+module.exports = db;
