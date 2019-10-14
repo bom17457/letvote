@@ -1,7 +1,6 @@
 let db = require('../models')
 
-module.exports.insert = async function(data, userID){       
-    console.log(data) 
+module.exports.insert = async function(data, userID){           
     await db.elections.create({
         topic: data.topic,
         description: data.description, 
