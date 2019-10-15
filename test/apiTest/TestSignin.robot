@@ -9,7 +9,7 @@ a user with authority account
 a user with voter account
     Create Session  signin  ${API}/signin
     ${headers}=  Create Dictionary  Content-Type=application/json
-    ${data}=  Create Dictionary  username=${voter username}  password=abcd1234
+    ${data}=  Create Dictionary  username=${voter username}   password=abcd1234
     Set Global Variable  ${headers}
     Set Global Variable  ${data}
 

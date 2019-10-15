@@ -13,6 +13,7 @@ Resource    TestCreateElection.robot
 Resource    TestGetElections.robot
 Resource    TestFindVoter.robot
 Resource    TestEnrollToElection.robot
+Resource    TestGetBallot.robot
 *** Variables ***
 ${API}      http://localhost:3000
 ${authority username}  authority
@@ -63,10 +64,10 @@ Scenario: success - Signin With "voter" account
     And recived access token
     And role is voter
 
-# Scenario: Get Ballot
-#     Given a voter want ballot list
-#     WHEN voter request ballot list
-#     Then recive ballot
+Scenario: Get Ballot
+    Given a voter want ballot list
+    WHEN voter request ballot list
+    Then user recived status code 200
 
 Scenario: success - Signin With "candidate" account
     Given a user with candidate account
