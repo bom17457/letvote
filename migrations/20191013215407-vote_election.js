@@ -6,6 +6,7 @@ module.exports = {
       election_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
+        primaryKey: true,
         references: {
           model: 'candidate_join_election',
           key: 'election_id'
@@ -14,6 +15,7 @@ module.exports = {
       candidate_id: {
         type: Sequelize.STRING(20),
         allowNull: false,
+        primaryKey: true,
         references: {
           model: 'candidate_join_election',
           key: 'user_id'
@@ -22,6 +24,7 @@ module.exports = {
       voter_id: {
         type: Sequelize.STRING(20),
         allowNull: false,
+        primaryKey: true,
         references: {
           model: 'users',
           key: 'id'
