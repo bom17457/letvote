@@ -13,6 +13,17 @@ module.exports = {
       status: 'active',
       create_datetime: new Date(),
       owner: '025930461038-1'
+    },{
+      topic: 'topic Title',
+      description: 'election description 2',
+      displaytext: 'display',
+      start_register_datetime: moment().format('YYYY-MM-DD HH:mm:ss').toString(),
+      end_register_datetime: moment().add(7, 'days').format('YYYY-MM-DD HH:mm:ss').toString(),
+      start_vote_datetime: moment().add(8, 'days').format('YYYY-MM-DD HH:mm:ss').toString(),
+      end_vote_datetime: moment().add(9, 'days').format('YYYY-MM-DD HH:mm:ss').toString(),
+      status: 'active',
+      create_datetime: new Date(),
+      owner: '025930461038-1'
     }])
   },
 
