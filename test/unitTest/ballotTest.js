@@ -5,7 +5,11 @@ let ballot = require('../../controllers/ballot')
 
 describe('getAllElection', function () {
     it('should return 200 and return json object', async function () {
-        let req = new mockRequest({})
+        let req = new mockRequest({
+            authInfo:{
+                id: '025930461038-4'
+            }
+        })
         let res = new mockResponse({})
         let exec = false
         let next = function () { exec = true }
