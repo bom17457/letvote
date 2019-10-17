@@ -1,7 +1,8 @@
 let db = require('../models')
 let Op = db.Sequelize.Op
+const moment = require('moment')
 module.exports.getBallots = async function (userID) {
-    let election = await db.sequelize.query(`select *, IF((select COUNT(*) from vote_election where voter_id = '${userID}' and election_id = elections.id), 'vote', 'unvote')as isVote from elections`)
+    let election = await db.sequelize.query(`select *, IF((select COUNT(*) from vote_election where voter_id = '${userID}' and election_id = elections.id), 'vote', 'unvote')as isVote from elections where elections.status='active'`)
     return election[0]
 }
 
@@ -21,7 +22,7 @@ module.exports.getBallotDetail = async function (electionID) {
 }
 
 module.exports.vote = async function (electionID, candidateID, voterID) {
-    await db.vote_election.create({
+    return await db.vote_election.create({
         election_id: electionID,
         candidate_id: candidateID,
         voter_id: voterID,
@@ -32,4 +33,13 @@ module.exports.vote = async function (electionID, candidateID, voterID) {
 module.exports.isNotVote = async function (electionID, id) {
     let haveVote = await db.vote_election.findOne({where: {election_id: electionID, voter_id: id}})
     if(haveVote != null) throw 'have vote'
+}
+
+module.exports.isInVote = async function (electionID) {
+    let election = await db.elections.findOne({where: {id: electionID}})
+    const between = moment().startOf('day').isBetween(moment(election.start_vote_datetime), moment(election.end_vote_datetime), 'day')
+    const same_start = moment().startOf('day').isSame(moment(election.start_vote_datetime), 'day')
+    const same_end = moment().startOf('day').isSame(moment(election.end_vote_datetime), 'day')       
+    if(!(between || same_start || same_end)) throw 'timeup'    
+    if(election == null) throw 'not found elections'
 }

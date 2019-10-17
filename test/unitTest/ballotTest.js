@@ -63,12 +63,11 @@ describe('voting', function(){
     it('Should return 200 and return json object', async function(){
         let req = new mockRequest({
             authInfo: {
-                id: '025930461038-4'
+                id: '025930461038-5'
             },
             body:{
                 electionID: 1,
                 candidateID: '025930461038-2',
-                voterID: '025930461038-5'
             }
         })
         let res = new mockResponse({})

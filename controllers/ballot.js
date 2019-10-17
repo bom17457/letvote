@@ -26,34 +26,44 @@ const struct = {
       let { electionID } = req.params
       let ballotDetail = await Iballot.getBallotDetail(electionID)
       res.json(ballotDetail)
-    } catch (Exception) {      
+    } catch (Exception) {
       res.status(400)
     }
   },
   vote: async function (req, res, next) {
     try {
-      let { electionID, candidateID, voterID } = req.body
-      await Iballot.vote(electionID, candidateID, voterID)
-      res.status(200)
-    } catch (Exception) {      
-      res.status(400)
+      let {id} = req.authInfo      
+      let { electionID, candidateID } = req.body      
+      let result = await Iballot.vote(electionID, candidateID, id)
+      res.send(200)
+    } catch (Exception) {
+      res.send(400)
     }
   },
   isNotVote: async function (req, res, next) {
     try {
       let { id } = req.authInfo
-      let { electionID } = req.params
+      let  electionID  = req.params.electionID || req.body.electionID
       await Iballot.isNotVote(electionID, id)
       next()
     } catch (Exception) {      
-      res.status(400)
+      res.send(400)
+    }
+  },
+  isInVote: async function (req, res, next) {
+    try {
+      let electionID  = req.params.electionID || req.body.electionID            
+      await Iballot.isInVote(electionID)
+      next();
+    } catch (Exception) {            
+      res.send(400)
     }
   }
 }
 router.get('/', struct.ballots);
-router.get('/electionID', struct.isNotVote, struct.getCandidiateInBallot)
-router.get('/candidate/:electionID', struct.isNotVote, struct.getBallotDetail)
-router.post('/vote', struct.isNotVote, struct.vote)
+router.get('/:electionID', struct.isNotVote, struct.getBallotDetail)
+router.get('/candidate/:electionID', struct.isInVote,struct.isNotVote, struct.getCandidiateInBallot)
+router.post('/vote', struct.isInVote, struct.isNotVote, struct.vote)
 module.exports = {
   router: router,
   ...struct
