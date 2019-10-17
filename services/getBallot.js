@@ -17,7 +17,7 @@ module.exports.getCandidates = async function (electionID) {
 }
 
 module.exports.getBallotDetail = async function (electionID) {
-    let election = await db.elections.findOne({where:{status:'active', id: electionID}})
+    let election = await db.elections.findOne({ where: { status: 'active', id: electionID } })
     return election
 }
 
@@ -30,16 +30,31 @@ module.exports.vote = async function (electionID, candidateID, voterID) {
     })
 }
 
-module.exports.isNotVote = async function (electionID, id) {
-    let haveVote = await db.vote_election.findOne({where: {election_id: electionID, voter_id: id}})
-    if(haveVote != null) throw 'have vote'
+module.exports.isNotExistVote = async function (electionID, id) {
+    let haveVote = await db.vote_election.findOne({ where: { election_id: electionID, voter_id: id } })
+    if (haveVote != null) throw 'have vote'
 }
 
-module.exports.isInVote = async function (electionID) {
-    let election = await db.elections.findOne({where: {id: electionID}})
+module.exports.isBetweenVote = async function (electionID) {
+    let election = await db.elections.findOne({ where: { id: electionID } })
+    if (election == null) throw 'not found elections'
     const between = moment().startOf('day').isBetween(moment(election.start_vote_datetime), moment(election.end_vote_datetime), 'day')
     const same_start = moment().startOf('day').isSame(moment(election.start_vote_datetime), 'day')
-    const same_end = moment().startOf('day').isSame(moment(election.end_vote_datetime), 'day')       
-    if(!(between || same_start || same_end)) throw 'timeup'    
-    if(election == null) throw 'not found elections'
+    const same_end = moment().startOf('day').isSame(moment(election.end_vote_datetime), 'day')
+    if (!(between || same_start || same_end)) throw 'timeup'    
+
+    return between || same_start || same_end
+}
+
+module.exports.result = async function (electionID) {
+    let result = await db.sequelize.query(`select 
+        vote_election.candidate_id, 
+        users.fname, 
+        users.lname, 
+        COUNT(voter_id) as 'result'
+    from letvote.vote_election 
+    join letvote.users on users.id = candidate_id 
+    Where election_id = ${electionID} GROUP BY candidate_id`)
+
+    return result[0]
 }

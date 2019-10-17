@@ -32,38 +32,48 @@ const struct = {
   },
   vote: async function (req, res, next) {
     try {
-      let {id} = req.authInfo      
-      let { electionID, candidateID } = req.body      
-      let result = await Iballot.vote(electionID, candidateID, id)
+      let { id } = req.authInfo
+      let { electionID, candidateID } = req.body
+      await Iballot.vote(electionID, candidateID, id)
       res.send(200)
     } catch (Exception) {
       res.send(400)
     }
   },
-  isNotVote: async function (req, res, next) {
+  isNotExistVote: async function (req, res, next) {
     try {
       let { id } = req.authInfo
-      let  electionID  = req.params.electionID || req.body.electionID
-      await Iballot.isNotVote(electionID, id)
+      let electionID = req.params.electionID || req.body.electionID
+      await Iballot.isNotExistVote(electionID, id)
       next()
-    } catch (Exception) {      
+    } catch (Exception) {
       res.send(400)
     }
   },
-  isInVote: async function (req, res, next) {
+  isBetweenVote: async function (req, res, next) {
     try {
-      let electionID  = req.params.electionID || req.body.electionID            
-      await Iballot.isInVote(electionID)
+      let electionID = req.params.electionID || req.body.electionID
+      await Iballot.isBetweenVote(electionID)
       next();
-    } catch (Exception) {            
+    } catch (Exception) {
       res.send(400)
+    }
+  },
+  result: async function (req, res, next) {
+    try {
+      let electionID = req.params.electionID || req.body.electionID
+      let result = await Iballot.result(electionID)      
+      res.json(result)
+    } catch (Exception) {
+      res.status(400)
     }
   }
 }
 router.get('/', struct.ballots);
-router.get('/:electionID', struct.isNotVote, struct.getBallotDetail)
-router.get('/candidate/:electionID', struct.isInVote,struct.isNotVote, struct.getCandidiateInBallot)
-router.post('/vote', struct.isInVote, struct.isNotVote, struct.vote)
+router.get('/result', struct.result)
+router.get('/:electionID', struct.isBetweenVote, struct.isNotExistVote, struct.getBallotDetail)
+router.get('/candidate/:electionID', struct.isBetweenVote, struct.isNotExistVote, struct.getCandidiateInBallot)
+router.post('/vote', struct.isBetweenVote, struct.isNotExistVote, struct.vote)
 module.exports = {
   router: router,
   ...struct
