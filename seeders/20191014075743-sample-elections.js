@@ -24,6 +24,17 @@ module.exports = {
       status: 'active',
       create_datetime: new Date(),
       owner: '025930461038-1'
+    },{
+      topic: 'topic Title3',
+      description: 'election description 2',
+      displaytext: 'display',
+      start_register_datetime: moment().format('YYYY-MM-DD').toString(),
+      end_register_datetime: moment().format('YYYY-MM-DD').toString(),
+      start_vote_datetime: moment().format('YYYY-MM-DD').toString(),
+      end_vote_datetime: moment().format('YYYY-MM-DD').toString(),
+      status: 'active',
+      create_datetime: new Date(),
+      owner: '025930461038-1'
     }])
   },
 
