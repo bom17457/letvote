@@ -93,7 +93,7 @@ describe('voting', function(){
         let next = function () { exec = true }
 
         await ballot.vote(req, res, next)
-        await assert.equal(res.statusCode, '400', 'Should return 200')        
+        await assert.equal(res.statusCode, '400', `Should return 400, got ${res.statusCode}`)        
     })
 })
 
@@ -179,10 +179,10 @@ describe('get election result', function(){
     it('Should return 400', async function(){
         let req = new mockRequest({
             authInfo: {
-                id: '025930461038-1'
+                id: '02593046'
             },
             params: {
-                electionID: 0
+                
             }
         })
         let res = new mockResponse({})
@@ -190,7 +190,7 @@ describe('get election result', function(){
         let next = function () { exec = true }
 
         await ballot.result(req, res, next)
-        await assert.equal(res.statusCode, '400', 'Should be return 200')        
+        await assert.equal(res.statusCode, '400', `Should be return 400, got ${res.statusCode}`)        
     })
 })
 
