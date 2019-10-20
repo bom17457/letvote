@@ -97,7 +97,7 @@ describe('voting', function(){
     })
 })
 
-describe('check not exist vote', function(){
+describe('check is not exist vote', function(){
     it('Should execute next function', async function(){
         let req = new mockRequest({
             authInfo: {
@@ -190,6 +190,42 @@ describe('get election result', function(){
         let next = function () { exec = true }
 
         await ballot.result(req, res, next)
+        await assert.equal(res.statusCode, '400', 'Should be return 200')        
+    })
+})
+
+describe('is between vote', function(){
+    it('Should return execute next function', async function(){
+        let req = new mockRequest({
+            authInfo: {
+                id: '025930461038-1'
+            },
+            params: {
+                electionID: 3
+            }
+        })
+        let res = new mockResponse({})
+        let exec = false
+        let next = function () { exec = true }
+
+        await ballot.isBetweenVote(req, res, next)
+        await assert.equal(exec, true, 'Should execute next()')
+    })
+
+    it('Should return 400', async function(){
+        let req = new mockRequest({
+            authInfo: {
+                id: '025930461038-1'
+            },
+            params: {
+                electionID: 0
+            }
+        })
+        let res = new mockResponse({})
+        let exec = false
+        let next = function () { exec = true }
+
+        await ballot.isBetweenVote(req, res, next)
         await assert.equal(res.statusCode, '400', 'Should be return 200')        
     })
 })

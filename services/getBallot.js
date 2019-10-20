@@ -11,8 +11,7 @@ module.exports.getCandidates = async function (electionID) {
     from users inner 
     join candidate_join_election 
     on users.id = candidate_join_election.user_id 
-    where candidate_join_election.election_id = ${electionID} and candidate_join_election.status = 'enable'`)
-
+    where candidate_join_election.election_id = ${electionID} and candidate_join_election.status = 'enable'`)    
     return candidates[0]
 }
 
@@ -54,7 +53,7 @@ module.exports.result = async function (electionID) {
         COUNT(voter_id) as 'result'
     from letvote.vote_election 
     join letvote.users on users.id = candidate_id 
-    Where election_id = ${electionID} GROUP BY candidate_id`)
+    Where election_id = ${electionID} GROUP BY candidate_id ORDER BY result desc`)
 
     return result[0]
 }
