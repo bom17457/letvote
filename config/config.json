@@ -15,8 +15,9 @@
     }
   },
   "test": {
-    "database": "letvote",    
-    "dialect": "sqlite"    
+    "database": "letvote",
+    "dialect": "sqlite",
+    "storage":"test.db"
   },
   "production": {
     "username": "root",
