@@ -16,7 +16,7 @@ node{
         sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' config.tmp > config.json"        
         sh "cat config.json"
         unit.inside {       
-            sh 'npm install bcrypt --save'
+            sh 'cp /app/node_modules .'
             sh 'npm run test'
         }
     }
