@@ -16,7 +16,7 @@ node{
         sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' config.tmp > config.json"        
         sh "cat config.json"
         unit.inside {       
-            sh 'cp /app/node_modules .'
+            sh 'cp -r /app/node_modules .'
             sh 'export NODE_ENV=test'
             sh 'npm run test'
         }
