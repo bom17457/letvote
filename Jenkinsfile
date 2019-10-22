@@ -17,6 +17,7 @@ node{
         sh "cat config.json"
         unit.inside {       
             sh 'cp /app/node_modules .'
+            sh 'export NODE_ENV=test'
             sh 'npm run test'
         }
     }
