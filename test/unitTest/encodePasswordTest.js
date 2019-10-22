@@ -6,7 +6,7 @@ describe('passwordEncoder', function(){
     let encode;
     it('Should return string', async function(){        
         encode = await passwordEncoder.hash('password')
-        await assert.notEqual(typeof encode, 'String', 'Should return string')
+        await assert.equal(typeof encode, 'string', 'Should return string')
     })    
 
     it('Should return true if pass the password verify', async function(){
