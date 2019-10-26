@@ -9,8 +9,8 @@ const config = require('../config/config.json')[env];
 const db = {};
 
 let sequelize;
-if (config.test) {
-  sequelize = new Sequelize(process.env[config.test], config);
+if (config) {
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }

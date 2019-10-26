@@ -15,9 +15,18 @@
     }
   },
   "test": {
+    "username": "root",
+    "password": "abcd1234",
     "database": "letvote",
     "dialect": "sqlite",
-    "storage":"test.db"
+    "storage": "test.db",    
+    "define": {
+      "timestamps": false,
+      "freezeTableName": true
+    },
+    "query": {
+      "raw": true
+    }
   },
   "production": {
     "username": "root",
