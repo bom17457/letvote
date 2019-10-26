@@ -14,7 +14,6 @@ module.exports = function(sequelize, DataTypes) {
     candidate_id: {
       type: DataTypes.STRING(20),
       allowNull: false,
-      primaryKey: true,
       references: {
         model: 'candidate_join_election',
         key: 'user_id'
