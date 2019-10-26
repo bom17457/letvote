@@ -14,8 +14,7 @@ module.exports = {
       },
       candidate_id: {
         type: Sequelize.STRING(20),
-        allowNull: false,
-        primaryKey: true,
+        allowNull: false,        
         references: {
           model: 'candidate_join_election',
           key: 'user_id'
