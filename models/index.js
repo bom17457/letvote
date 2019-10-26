@@ -9,11 +9,7 @@ const config = require('../config/config.json')[env];
 const db = {};
 
 let sequelize;
-if (config) {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 fs
   .readdirSync(__dirname)
@@ -30,7 +26,7 @@ Object.keys(db).forEach(modelName => {
     db[modelName].associate(db);
   }
 });
-console.log(db)
+
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
