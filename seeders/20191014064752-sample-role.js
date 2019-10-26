@@ -2,6 +2,7 @@
 
 module.exports = {
   up: async (queryInterface, Sequelize) => {        
+    await queryInterface.sequelize.query('PRAGMA foreign_keys = OFF');
     await queryInterface.bulkInsert('role', [
       {
         role: 'authority'
