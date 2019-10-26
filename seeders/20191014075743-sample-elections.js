@@ -3,6 +3,7 @@ let moment = require('moment')
 module.exports = {
   up: (queryInterface, Sequelize) => {
     return queryInterface.bulkInsert('elections', [{
+      id:1,
       topic: 'topic',
       description: 'election description',
       displaytext: 'display',
@@ -14,6 +15,7 @@ module.exports = {
       create_datetime: new Date(),
       owner: '025930461038-1'
     },{
+      id:2,
       topic: 'topic Title',
       description: 'election description 2',
       displaytext: 'display',
@@ -25,6 +27,7 @@ module.exports = {
       create_datetime: new Date(),
       owner: '025930461038-1'
     },{
+      id:3,
       topic: 'topic Title3',
       description: 'election description 2',
       displaytext: 'display',
@@ -40,9 +43,9 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const transaction = await queryInterface.sequelize.transaction(); 
-    await queryInterface.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', null, {transaction});    
-    await queryInterface.sequelize.query('truncate table `elections`', null, {transaction});
-    await queryInterface.sequelize.query('SET FOREIGN_KEY_CHECKS = 1', {transaction});
+    await queryInterface.sequelize.query('PRAGMA foreign_keys = OFF', null, {transaction});    
+    await queryInterface.sequelize.query('DELETE FROM `elections` WHERE true', null, {transaction});
+    await queryInterface.sequelize.query('PRAGMA foreign_keys = ON', {transaction});
     await transaction.commit()
   }
 };

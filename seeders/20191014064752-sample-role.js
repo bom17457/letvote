@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = {
-  up: (queryInterface, Sequelize) => {
-    return queryInterface.bulkInsert('role', [
+  up: async (queryInterface, Sequelize) => {        
+    await queryInterface.bulkInsert('role', [
       {
         role: 'authority'
       },

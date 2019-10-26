@@ -62,9 +62,8 @@ module.exports = {
       status: 'enable',
       create_datetime: new Date()
     }
-  ])
+    ])
   },
-
   down: (queryInterface, Sequelize) => {
     return queryInterface.bulkDelete('users')
   }

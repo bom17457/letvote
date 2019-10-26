@@ -12,9 +12,9 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const transaction = await queryInterface.sequelize.transaction(); 
-    await queryInterface.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', null, {transaction});    
-    await queryInterface.sequelize.query('truncate table `candidate_join_election`', null, {transaction});
-    await queryInterface.sequelize.query('SET FOREIGN_KEY_CHECKS = 1', {transaction});
+    await queryInterface.sequelize.query('PRAGMA foreign_keys = OFF', null, {transaction});    
+    await queryInterface.sequelize.query('DELETE FROM `candidate_join_election` WHERE true', null, {transaction});
+    await queryInterface.sequelize.query('PRAGMA foreign_keys = ON;', {transaction});
     await transaction.commit()
   }
 };
