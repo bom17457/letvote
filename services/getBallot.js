@@ -2,7 +2,11 @@ let db = require('../models')
 let Op = db.Sequelize.Op
 const moment = require('moment')
 module.exports.getBallots = async function (userID) {
-    let election = await db.sequelize.query(`select *, IF((select COUNT(*) from vote_election where voter_id = '${userID}' and election_id = elections.id), 'vote', 'unvote')as isVote from elections where elections.status='active'`)
+    let election = await db.sequelize.query(`select elections.*, vote_election.voter_id as isVote
+    from elections 
+    left join vote_election on vote_election.election_id = elections.id 
+    where elections.status='active' 
+    or vote_election.voter_id = '${userID}'`)
     return election[0]
 }
 
