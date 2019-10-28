@@ -6,28 +6,16 @@ module.exports = {
       election_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true,
-        references: {
-          model: 'candidate_join_election',
-          key: 'election_id'
-        }
+        primaryKey: true
       },
       candidate_id: {
         type: Sequelize.STRING(20),
-        allowNull: false,        
-        references: {
-          model: 'candidate_join_election',
-          key: 'user_id'
-        }
+        allowNull: false
       },
       voter_id: {
         type: Sequelize.STRING(20),
         allowNull: false,
-        primaryKey: true,
-        references: {
-          model: 'users',
-          key: 'id'
-        }
+        primaryKey: true
       },
       create_datetime: {
         type: Sequelize.DATE,
@@ -36,7 +24,6 @@ module.exports = {
       }
     })
   },
-
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('vote_election')
   }

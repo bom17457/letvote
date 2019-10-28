@@ -6,20 +6,12 @@ module.exports = {
       election_id:{
         type: Sequelize.INTEGER,
         allowNull: false,
-        primaryKey: true,
-        references: {
-          model:'elections',
-          key: 'id'
-        }
+        primaryKey: true
       },
       user_id:{
         type: Sequelize.STRING(20),
         allowNull: false,
-        primaryKey: true,
-        references: {
-          model:'users',
-          key: 'id'
-        }
+        primaryKey: true
       },
       status: {
         type: Sequelize.ENUM('enable', 'disable'),

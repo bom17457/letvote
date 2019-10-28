@@ -3,31 +3,17 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('vote_election', {
     election_id: {
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER,
       allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'candidate_join_election',
-        key: 'election_id'
-      }
+      primaryKey: true
     },
     candidate_id: {
       type: DataTypes.STRING(20),
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'candidate_join_election',
-        key: 'user_id'
-      }
+      allowNull: false
     },
     voter_id: {
       type: DataTypes.STRING(20),
-      allowNull: false,
-      primaryKey: true,
-      references: {
-        model: 'users',
-        key: 'id'
-      }
+      allowNull: false
     },
     create_datetime: {
       type: DataTypes.DATE,

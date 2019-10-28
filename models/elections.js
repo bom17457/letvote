@@ -3,10 +3,9 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('elections', {
     id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      primaryKey: true
     },
     topic: {
       type: DataTypes.STRING(50),
@@ -37,7 +36,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     status: {
-      type: DataTypes.ENUM('active','inactive'),
+      type: DataTypes.TEXT,
       allowNull: false,
       defaultValue: 'active'
     },
@@ -47,11 +46,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     owner: {
       type: DataTypes.STRING(20),
-      allowNull: false,
-      references: {
-        model: 'users',
-        key: 'id'
-      }
+      allowNull: false
     }
   }, {
     tableName: 'elections'

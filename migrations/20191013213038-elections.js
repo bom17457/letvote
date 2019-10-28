@@ -50,10 +50,6 @@ module.exports = {
       owner: {
         type: Sequelize.STRING(20),
         allowNull:false,
-        references: {
-          model:'users',
-          key: 'id'
-        }
       }
     })
   },

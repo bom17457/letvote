@@ -3,26 +3,17 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('disableCandidate', {
     id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      primaryKey: true,
-      autoIncrement: true
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      primaryKey: true
     },
     election_id: {
-      type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'candidate_join_election',
-        key: 'election_id'
-      }
+      type: DataTypes.INTEGER,
+      allowNull: false
     },
     candidate_id: {
       type: DataTypes.STRING(255),
-      allowNull: false,
-      references: {
-        model: 'candidate_join_election',
-        key: 'user_id'
-      }
+      allowNull: false
     },
     reason: {
       type: DataTypes.STRING(255),

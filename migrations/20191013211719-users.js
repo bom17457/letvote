@@ -28,10 +28,6 @@ module.exports = {
       role:{
         type: Sequelize.STRING(20),
         allowNull: false,
-        references: {
-          model:'role',
-          key: 'role'
-        }
       },
       status:{
         type: Sequelize.ENUM('enable', 'disable'),

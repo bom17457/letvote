@@ -11,19 +11,11 @@ module.exports = {
       },
       election_id: {
         type: Sequelize.INTEGER,
-        allowNull: false,
-        references: {
-          model:'candidate_join_election',
-          key: 'election_id'
-        }
+        allowNull: false
       },
       candidate_id: {
         type: Sequelize.STRING,
-        allowNull: false,
-        references: {
-          model: 'candidate_join_election',
-          key: 'user_id'
-        }
+        allowNull: false
       },
       reason:{
         type: Sequelize.STRING,
