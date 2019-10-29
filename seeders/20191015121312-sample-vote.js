@@ -17,9 +17,15 @@ module.exports = {
 
   down: async (queryInterface, Sequelize) => {
     const transaction = await queryInterface.sequelize.transaction();
-    await queryInterface.sequelize.query('PRAGMA foreign_keys = OFF', null, { transaction });
-    await queryInterface.sequelize.query('DELETE FROM `vote_election` WHERE true', null, { transaction });
-    await queryInterface.sequelize.query('PRAGMA foreign_keys = ON', { transaction });
+    if(process.env.NODE_ENV == 'test'){
+      await queryInterface.sequelize.query('PRAGMA foreign_keys = OFF', null, { transaction });
+      await queryInterface.sequelize.query('DELETE FROM `vote_election` WHERE true', null, { transaction });
+      await queryInterface.sequelize.query('PRAGMA foreign_keys = ON', { transaction });
+    }else{
+      await queryInterface.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', null, { transaction });
+      await queryInterface.sequelize.query('DROP TABLE `vote_election`', null, { transaction });
+      await queryInterface.sequelize.query('SET FOREIGN_KEY_CHECKS = 0', { transaction });
+    }
     await transaction.commit()
   }
 };
