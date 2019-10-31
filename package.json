@@ -29,7 +29,6 @@
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "sequelize": "^5.19.5",
-    "sinon": "^7.4.2",
     "sqlite3": "^4.1.0"
   },
   "nyc": {
@@ -43,10 +42,11 @@
     ]
   },
   "pkg": {
-	"script":"**"
+    "script": "**"
   },
   "devDependencies": {
     "mock-express-request": "^0.2.2",
-    "sequelize-mock": "^0.10.2"
+    "sequelize-mock": "^0.10.2",
+    "sinon": "^7.5.0"
   }
 }
