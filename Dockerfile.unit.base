@@ -2,5 +2,6 @@ FROM node:12.10.0 AS backend
 WORKDIR /app/letvote-backend
 COPY ./package.json ./package.json
 RUN npm install 
-RUN npm install sequelize-cli --save -g
+RUN npm install -g sequelize-cli --unsafe-perm
+RUN npm install -g sqlite3@4.1.0 --unsafe-perm
 RUN mv node_modules /app
