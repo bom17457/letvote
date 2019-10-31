@@ -2,6 +2,8 @@ let assert = require('assert')
 let mockResponse = require('mock-express-response')
 let mockRequest = require('mock-express-request')
 let getUserProperties = require('../../controllers/getUserProperties')
+const sinon = require('sinon')
+const db = require('../../models')
 describe('get user properties', function(){
     let encode;
     it('Should return user detail and status code 200 "OK"', async function(){        
@@ -45,11 +47,20 @@ describe('get user properties', function(){
 })
 
 describe('search user properties', function(){
+    let sandbox;
+    let searchStub;
+
+    before(function(){
+        sandbox = sinon.sandbox.create();
+        searchStub = sandbox.stub(db.users, 'findAll')
+    })
+
     it('input id only Should return 200 and userlist', async function(){
+        searchStub.returns({})
         let req = new mockRequest({
             body: {
                 id:'025930461038-1',
-                fullname: 'authority authority'
+                fullname: ''
             }
         })
         let res = new mockResponse({})
@@ -62,6 +73,7 @@ describe('search user properties', function(){
     })
 
     it('Should return 400 not found', async function(){
+        searchStub.returns([])
         let req = new mockRequest({
             body: {
                 id:'00000000000-1',

@@ -66,7 +66,7 @@ describe('Create or Update Election', function () {
                 topic: 'Student Election 2020',
                 description: 'Electing fail',
                 electionFrom: '18082019',
-                electionTo: '18082019',
+                electionTo: null,
                 registerFrom: '18082019',
                 registerTo: '18082019',
                 displayText: 'Who is your partant'
@@ -78,7 +78,7 @@ describe('Create or Update Election', function () {
         let next = function () { exec = true };
 
         await manageElection.PostElection(req, res, next)
-        await assert.equal(res.statusCode, '400', 'Should not return 400')
+        await assert.equal(res.statusCode, '400', 'Should return 400')
     })
 })
 
