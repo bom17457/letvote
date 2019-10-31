@@ -18,6 +18,7 @@ node{
         unit.inside {       
             sh 'cp -r /app/node_modules .'
             sh 'export NODE_ENV=test'
+            sh 'echo $NODE_ENV'
             sh 'npm run test'
         }
     }
