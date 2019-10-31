@@ -15,7 +15,7 @@ module.exports.getCandidates = async function (electionID) {
     from users inner 
     join candidate_join_election 
     on users.id = candidate_join_election.user_id 
-    where candidate_join_election.election_id = ${electionID} and candidate_join_election.status = 'enable'`)    
+    where candidate_join_election.election_id = ${electionID} and candidate_join_election.status = 'enable'`)
     return candidates[0]
 }
 
@@ -44,19 +44,19 @@ module.exports.isBetweenVote = async function (electionID) {
     const between = moment().startOf('day').isBetween(moment(election.start_vote_datetime), moment(election.end_vote_datetime), 'day')
     const same_start = moment().startOf('day').isSame(moment(election.start_vote_datetime), 'day')
     const same_end = moment().startOf('day').isSame(moment(election.end_vote_datetime), 'day')
-    if (!(between || same_start || same_end)) throw 'timeup'    
+    if (!(between || same_start || same_end)) throw 'timeup'
 
     return between || same_start || same_end
 }
 
 module.exports.result = async function (electionID) {
     let result = await db.sequelize.query(`select 
-        vote_election.candidate_id, 
-        users.fname, 
-        users.lname, 
-        COUNT(voter_id) as 'result'
-    from letvote.vote_election 
-    join letvote.users on users.id = candidate_id 
+    vote_election.candidate_id, 
+    users.fname, 
+    users.lname, 
+    COUNT(voter_id) as 'result'
+    from vote_election 
+    join users on users.id = candidate_id 
     Where election_id = ${electionID} GROUP BY candidate_id ORDER BY result desc`)
 
     return result[0]
