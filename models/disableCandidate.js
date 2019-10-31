@@ -10,19 +10,11 @@ module.exports = function(sequelize, DataTypes) {
     },
     election_id: {
       type: DataTypes.INTEGER(11),
-      allowNull: false,
-      references: {
-        model: 'candidate_join_election',
-        key: 'election_id'
-      }
+      allowNull: false
     },
     candidate_id: {
-      type: DataTypes.STRING(255),
-      allowNull: false,
-      references: {
-        model: 'candidate_join_election',
-        key: 'user_id'
-      }
+      type: DataTypes.STRING(20),
+      allowNull: false
     },
     reason: {
       type: DataTypes.STRING(255),
