@@ -3,9 +3,10 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('login', {
     id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      primaryKey: true
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
     },
     token: {
       type: DataTypes.STRING(500),

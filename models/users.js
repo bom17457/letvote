@@ -17,7 +17,8 @@ module.exports = function(sequelize, DataTypes) {
     },
     username: {
       type: DataTypes.STRING(100),
-      allowNull: false
+      allowNull: false,
+      unique: true
     },
     password: {
       type: DataTypes.STRING(200),
@@ -25,10 +26,14 @@ module.exports = function(sequelize, DataTypes) {
     },
     role: {
       type: DataTypes.STRING(20),
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'role',
+        key: 'role'
+      }
     },
     status: {
-      type: DataTypes.TEXT,
+      type: DataTypes.ENUM('enable','disable'),
       allowNull: false,
       defaultValue: 'enable'
     },

@@ -18,8 +18,8 @@ module.exports = {
       },
       username:{
         type: Sequelize.STRING(100),
-        allowNull: false,
-        primaryKey: true        
+        allowNull: false,        
+        unique: true,        
       },
       password:{
         type: Sequelize.STRING(200),
@@ -28,6 +28,12 @@ module.exports = {
       role:{
         type: Sequelize.STRING(20),
         allowNull: false,
+        references: {
+          model:  {
+            tableName: 'role'
+          },
+          key: 'role'
+        }
       },
       status:{
         type: Sequelize.ENUM('enable', 'disable'),

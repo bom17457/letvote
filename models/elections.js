@@ -3,9 +3,10 @@
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('elections', {
     id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      primaryKey: true
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true
     },
     topic: {
       type: DataTypes.STRING(50),
@@ -36,7 +37,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false
     },
     status: {
-      type: DataTypes.TEXT,
+      type: DataTypes.ENUM('active','inactive'),
       allowNull: false,
       defaultValue: 'active'
     },

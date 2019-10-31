@@ -27,7 +27,6 @@ module.exports = {
       create_datetime: new Date(),
       owner: '025930461038-1'
     }, {
-      id: 3,
       topic: 'topic Title3',
       description: 'election description 2',
       displaytext: 'display',

@@ -2,17 +2,30 @@
 
 module.exports = function(sequelize, DataTypes) {
   return sequelize.define('candidate_join_election', {
-    election_id: {
-      type: DataTypes.INTEGER,
+    id: {
+      type: DataTypes.INTEGER(11),
       allowNull: false,
-      primaryKey: true
+      primaryKey: true,
+      autoIncrement: true
+    },
+    election_id: {
+      type: DataTypes.INTEGER(11),
+      allowNull: false,
+      references: {
+        model: 'elections',
+        key: 'id'
+      }
     },
     user_id: {
       type: DataTypes.STRING(20),
-      allowNull: false
+      allowNull: false,
+      references: {
+        model: 'users',
+        key: 'id'
+      }
     },
     status: {
-      type: DataTypes.TEXT,
+      type: DataTypes.ENUM('enable','disable'),
       allowNull: false,
       defaultValue: 'enable'
     }
