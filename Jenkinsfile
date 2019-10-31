@@ -36,7 +36,7 @@ node{
     stage('deploy'){                
         sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' docker-compose.base > docker-compose.yml"
         sh "scp ./docker-compose.yml ubuntu@18.136.212.248:~/docker-compose.yml"
-        sh 'ssh ubuntu@18.136.212.248  "cd ~/; docker-compose down || true; docker-compose up -d"'
+        sh 'ssh ubuntu@18.136.212.248  "cd ~/; docker-compose down || true; docker-compose up -d"'        
         sh "curl -X POST -H 'Authorization: Bearer QMz1lANoiKims7nHiNq5Rja9nORS73ZBfOwX6Qk3eZe' -F 'message=Deploy Success. Click for review http://165.22.245.142/job/letvote-backend/$currentBuild.number/' https://notify-api.line.me/api/notify"
     }    
     

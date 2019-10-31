@@ -9,3 +9,5 @@ services:
         environment:
             - NODE_ENV=production
             - URL=letvote.wtf
+        command:
+            - sequelize db:migrate
