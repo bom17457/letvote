@@ -11,14 +11,12 @@ node{
     }
 
     stage('run unit test'){
-        def unit = docker.image('backend:0.0.4')
+        def unit = docker.image('backend:0.0.4').withRun('-e "NODE_ENV=test"')
         sh "mv config.json config.tmp"
         sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' config.tmp > config.json"        
         sh "cat config.json"
         unit.inside {       
             sh 'cp -r /app/node_modules .'
-            sh 'export NODE_ENV=test'
-            sh 'echo $NODE_ENV'
             sh 'npm run test'
         }
     }
