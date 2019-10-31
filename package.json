@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon npm start",
-    "test": "nyc mocha --recursive --exit",
+    "test": "sequelize db:seed:undo:all; sequelize db:seed:all; nyc mocha --recursive --exit",
     "robot-test": "robot test/apiTest/Common.robot"
   },
   "dependencies": {
