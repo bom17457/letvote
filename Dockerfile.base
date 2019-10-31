@@ -1,6 +1,7 @@
 FROM node:12.10.0-alpine AS deploy
 WORKDIR /app/letvote-backend
 COPY ./ ./
-RUN npm install
+RUN npm install -g sequelize-cli --unsafe-perm
+RUN npm install -g sqlite3@4.1.0 --unsafe-perm
 CMD ["npm",  "start"]
 EXPOSE 3000
