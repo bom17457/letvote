@@ -19,6 +19,7 @@ node{
         unit.inside('-e "NODE_ENV=test"') {       
             sh 'touch test.db'
             sh 'cp -r /app/node_modules .'
+            sh 'sequelize db:migrate'
             sh 'npm run test'
         }
     }
