@@ -10,16 +10,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors')
-var versionRouter = require('./controllers/version');
-var signin = require('./controllers/signin');
-var signout = require('./controllers/signout')
-var ballot = require('./controllers/ballot');
-var userproperties = require('./controllers/getUserProperties')
-var manageElection = require('./controllers/manageElection')
-var app = express();
-var authentication = require('./middlewares/authentication')
-var permission = require('./middlewares/permission')
+
+var signin          = require('./controllers/signin')
+var ballot          = require('./controllers/ballot')
+var signout         = require('./controllers/signout')
+var versionRouter   = require('./controllers/version')
+var permission      = require('./middlewares/permission')
+var manageElection  = require('./controllers/manageElection')
+var authentication  = require('./middlewares/authentication')
 var manageCandidate = require('./controllers/manageCandidate')
+var userproperties  = require('./controllers/getUserProperties')
 
 require('./utilities/prototype').prototype()
 
@@ -27,6 +27,7 @@ const corsOptions = {
     origin: [process.env.URL, 'http://localhost:8080', '*']
 }
 
+var app = express();
 app.use(cors(corsOptions))
 app.options('*', cors(corsOptions))
 app.use(logger('dev'));
