@@ -28,7 +28,9 @@
     "nyc": "^14.1.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
+    "pkg": "^4.4.0",
     "sequelize": "^5.19.5",
+    "sequelize-cli": "^5.5.1",
     "sqlite3": "^4.1.0"
   },
   "nyc": {

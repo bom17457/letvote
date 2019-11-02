@@ -88,3 +88,36 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind);
 }
+
+
+/**
+ * Pkg map argv to command
+ */
+const { exec } = require('child_process')
+let arg = process.argv.slice(2)
+
+const pkgapi = async function (arg) {
+  switch (arg) {
+    case 'test':
+      exec('npm run test', (err, stdout, stderr) => {
+        console.log('\x1b[36m%s',`${stdout}`);
+        process.exit(0)
+      })
+      break;
+    case 'migrate':
+      exec('node_modules/sequelize-cli/lib/sequelize --help', (err, stdout, stderr) => {
+        console.log(`${stdout}`);
+        process.exit(0)
+      })
+      break;
+    case 'npm':
+    break;
+    default:
+      console.log('letvotebackend [command]\n\n  [command]\t\t[description]\n  test\t\t\tRun unit test\n  migrate\t\tRun pending migration')
+      if(arg != '-h' || arg != '--help') console.log('not found command', `'${arg}'`)
+      process.exit(0)
+      break;
+  }
+}
+
+pkgapi(arg[0])
