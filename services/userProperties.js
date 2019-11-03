@@ -10,7 +10,7 @@ module.exports = {
         let userdetail = await db.users.findAll(
             {
                 where: {
-                    [Op.or]: [db.Sequelize.where(db.Sequelize.fn("concat", db.Sequelize.col("fname"), " ", db.Sequelize.col("lname")), {
+                    [Op.or]: [db.Sequelize.fn("concat", db.Sequelize.col("fname"), " ", db.Sequelize.col("lname"), {
                         [Op.like]: `%${fullname}%`
                     }), 
                     { 
