@@ -15,8 +15,9 @@ const howToAuth = new JwtStrategy(jwtOption, async function (payload, done) {
 })
 
 const isLogin = async function (req, res, next) {
-    let found = await db.login.findOne({where:{token: req.headers.authorization, status: 'login'}})
+    let found = await db.login.findOne({where:{token: req.headers.authorization}, order:[['id', 'desc']]})    
     if(found == null) res.send(405)    
+    if(found.status == 'logout') res.send(405)
     next();
 }
 
