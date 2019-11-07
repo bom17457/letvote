@@ -119,5 +119,6 @@ const pkgapi = async function (arg) {
       break;
   }
 }
-
-pkgapi(arg[0])
+if(arg.length != 0){
+  pkgapi(arg[0])
+}
