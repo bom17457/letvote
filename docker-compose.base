@@ -10,3 +10,4 @@ services:
             - NODE_ENV=production
             - URL=letvote.wtf
             - DATABASE=127.0.0.8
+        command: ["npm", "start"]
