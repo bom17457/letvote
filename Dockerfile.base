@@ -1,4 +1,4 @@
-FROM node:12.10.0-alpine AS backend
+FROM node:12.10.0-alpine
 WORKDIR /app/letvote-backend
 COPY ./package.json ./package.json
 RUN apk add --no-cache make gcc g++ python  
@@ -7,4 +7,5 @@ RUN npm install -g sequelize-cli --unsafe-perm
 RUN npm install -g sqlite3@4.1.0 --unsafe-perm
 RUN npm install -g pkg@4.4.0 --unsafe-perm
 RUN mv node_modules /app
+CMD ["sh", "-c", "cp -r ../node_modules/ ."]
 EXPOSE 3000
