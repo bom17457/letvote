@@ -1,4 +1,4 @@
-FROM alpine:3.10.3 AS deploy
+FROM node:12.10.0-alpine
 WORKDIR /app/letvote-backend
 COPY ./letvote-backend .
 CMD ["./letvote-backend"]
