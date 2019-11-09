@@ -2,7 +2,7 @@
 
 if [ "$1" == "app" ] || [ "$1" == "" ]
 then
-    scp ./Dockerfile.unit.base jenkins:/root/backend/Dockerfile.unit.base
+    scp ./Dockerfile.base jenkins:/root/backend/Dockerfile.base
     scp ./package.json jenkins:/root/backend/package.json    
     ssh jenkins docker build -f /root/backend/Dockerfile.base -t backend:$version /root/backend
 elif [ $1 == "e2e" ]
