@@ -30,12 +30,6 @@ node{
 
     stage('build'){
         docker.withRegistry('https://registry.gitlab.com/brombom43531/letvote-backend', 'username-password-gitlab-bom43531'){
-            def build = docker.image('backend:0.0.4')
-            build.inside('-e "NODE_ENV=production"') {
-                sh 'cp -r /app/node_modules .'
-                sh 'pkg --t node12-alpine-x64 -c package.json bin/www -o letvote-backend'
-            }
-
             def create_image = docker.build("registry.gitlab.com/brombom43531/letvote-backend:$git_last_hash", '-f Dockerfile.base .')
             create_image.push()
         }
