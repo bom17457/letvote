@@ -11,5 +11,5 @@ services:
             - URL=letvote.wtf
             - DATABASE=127.0.0.8
         command: 
-            - mv ../node_modules .
-            - npm start
+            - mv /app/node_modules /app/letvote-backend
+            - cd /app/letvote-backend npm start
