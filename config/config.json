@@ -33,7 +33,7 @@
     "username": "root",
     "password": "abcd1234",
     "database": "letvote",
-    "host": "18.136.212.248",
+    "host": "172.20.0.5",
     "dialect": "mysql",
     "timezone": "+07:00",
     "define": {
