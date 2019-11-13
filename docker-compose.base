@@ -8,8 +8,7 @@ services:
             - 3000:3000
         environment:
             - NODE_ENV=production
-            - URL=https://letvote.wtf
-            - DATABASE=127.0.0.8
+            - URL=https://letvote.wtf            
         networks:
             ubuntu_default:
                 ipv4_address: 172.20.0.4
