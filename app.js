@@ -24,7 +24,7 @@ var userproperties  = require('./controllers/getUserProperties')
 require('./utilities/prototype').prototype()
 
 const corsOptions = {
-    origin: [process.env.URL, 'http://localhost:8080', '*']
+    origin: [process.env.URL, 'http://localhost:8080', 'https://www.letvote.wtf', '*']
 }
 
 var app = express();
