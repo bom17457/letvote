@@ -22,19 +22,15 @@ node{
         }
     }
 
-    stage('Analyze Code'){
-        echo "todo"
-    }
-
     stage('build'){
         def build = docker.image('backend:0.0.5')
 
-        unit.inside('-e "NODE_ENV=test"'){
+        build.inside('-e "NODE_ENV=test"'){
             sh 'pkg -t node12-linux-x64 ./bin/www -c package.json --output letvote-backend'
         }        
-        
+
         docker.withRegistry('https://registry.gitlab.com/brombom43531/letvote-backend', 'username-password-gitlab-bom43531'){
-            def create_image = docker.build("registry.gitlab.com/brombom43531/letvote-backend:$git_last_hash", '-f Dockerfile.base .')
+            def create_image = docker.build("registry.gitlab.com/brombom43531/letvote-backend:$git_last_hash", '-f Dockerfile.prod.base .')
             create_image.push()
         }
     }
