@@ -1,0 +1,7 @@
+FROM node:12.10.0-alpine
+WORKDIR /app/letvote-backend
+COPY ./package.json ./package.json
+COPY ./node_modules ./node_modules
+COPY ./letvote-backend ./letvote-backend
+CMD ["sh", "-c", "./letvote-backend"]
+EXPOSE 3000

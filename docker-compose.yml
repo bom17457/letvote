@@ -1,0 +1,13 @@
+version: '2'
+services:
+    endvote:
+        container_name: endvote
+        image: registry.gitlab.com/brombom43531/letvote-backend:cbd9fd98       
+        restart: always
+        ports:
+            - 3000:3000
+        environment:
+            - NODE_ENV=production
+            - URL=letvote.wtf
+            - DATABASE=127.0.0.8
+        command: sh -c npm start
