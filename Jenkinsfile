@@ -23,7 +23,7 @@ node{
     }
 
     stage('build'){
-        def build = docker.image('backend:0.0.5')
+        def build = docker.image('backend:0.0.6')
 
         build.inside('-e "NODE_ENV=test"'){
             sh 'pkg -t node12-alpine-x64 ./bin/www -c package.json --output letvote-backend'
