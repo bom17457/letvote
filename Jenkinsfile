@@ -18,7 +18,7 @@ node{
         sh "cat config.json"        
         unit.inside('-e "NODE_ENV=test"') {       
             sh 'touch test.db'           
-            sh '\cp -r ../node_modules .' 
+            sh 'cp -r ../node_modules .' 
             sh 'npm run test'
         }
     }
