@@ -7,5 +7,5 @@ RUN npm install -g sequelize-cli --unsafe-perm
 RUN npm install -g sqlite3@4.1.0 --unsafe-perm
 RUN npm install -g pkg@4.4.0 --unsafe-perm
 RUN mv node_modules /app
-CMD ["sh", "-c", "\cp -r ../node_modules/ ."]
+ENTRYPOINT ["sh", "-c", "cp -r ../node_modules/ ."]
 EXPOSE 3000
