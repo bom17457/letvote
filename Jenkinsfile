@@ -11,7 +11,7 @@ node{
     }
 
     stage('run unit test'){
-        def unit = docker.image('backend:0.0.5')        
+        def unit = docker.image('backend:0.0.6')        
 
         sh "mv config.json config.tmp"
         sh "sed 's/REPLACE_GIT_LAST_HASH/$git_last_hash/g' config.tmp > config.json"        
@@ -23,7 +23,7 @@ node{
     }
 
     stage('build'){
-        def build = docker.image('backend:0.0.5')
+        def build = docker.image('backend:0.0.6')
 
         build.inside('-e "NODE_ENV=test"'){
             sh 'pkg -t node12-alpine-x64 ./bin/www -c package.json --output letvote-backend'
