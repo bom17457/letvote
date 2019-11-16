@@ -44,9 +44,16 @@
     ]
   },
   "pkg": {
-    "scripts": "**",
-    "assets": [
-      "config/*"
+    "scripts": [
+      "controllers/**", 
+      "config/**", 
+      "middlewares/**", 
+      "migrates/**", 
+      "models/**", 
+      "seeders/**", 
+      "services/**", 
+      "test/unitTest/**", 
+      "utilities/**"
     ]
   },
   "devDependencies": {
